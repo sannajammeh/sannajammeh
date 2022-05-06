@@ -27,8 +27,7 @@
     "react-smooth-scrollbar": "^7.2.2",
     "reading-time": "^1.5.0",
     "remark-slug": "^7.0.1",
-    "three": "^0.85.2",
-    "ui": "workspace:*"
+    "three": "^0.85.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
