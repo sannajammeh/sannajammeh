@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+  word-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  @apply text-radix-slate12 bg-radix-slate1;
+  cursor: crosshair;
+}
+
+.font-space-mono {
+  font-family: "Space Mono", monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Space Mono", monospace;
+}
+
+#wave {
+  @apply bg-radix-slate1;
+  max-width: 100%;
+}
+
+.text-down {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.text-bordered {
+  @apply text-radix-slate1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: -2px -2px 0 var(--slate12), 2px -2px 0 var(--slate12),
+    -2px 2px 0 var(--slate12), 2px 2px 0 var(--slate12);
+  opacity: 0.1;
+}
+
+.text-bordered-light {
+  @apply text-radix-slate1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: -1.5px -1.5px 0 var(--slate12), 1.5px -1.5px 0 var(--slate12),
+    -1.5px 1.5px 0 var(--slate12), 1.5px 1.5px 0 var(--slate12);
+  opacity: 0.25;
+}
+
+.container {
+  @apply px-4 md:px-0;
+}
+
+.fade-in {
+  animation: fade-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+::selection {
+  @apply text-radix-blue11 bg-radix-blue3;
+}
+
+@supports (scrollbar-gutter: stable) {
+  html {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}

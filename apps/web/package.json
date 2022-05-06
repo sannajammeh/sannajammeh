@@ -1,0 +1,48 @@
+{
+  "name": "web",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Sanna Jammeh",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "clsx": "^1.1.1",
+    "esbuild": "^0.14.38",
+    "glob": "^8.0.1",
+    "gray-matter": "^4.0.3",
+    "lodash-es": "^4.17.21",
+    "mdx-bundler": "^9.0.0",
+    "next": "^12.1.0",
+    "next-auth": "^4.3.2",
+    "nprogress": "^0.2.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-icons": "^4.3.1",
+    "react-scroll-parallax": "^3.1.0",
+    "react-smooth-scrollbar": "^7.2.2",
+    "reading-time": "^1.5.0",
+    "remark-slug": "^7.0.1",
+    "three": "^0.85.2",
+    "ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
+    "@types/glob": "^7.2.0",
+    "@types/lodash-es": "^4.17.6",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.3",
+    "autoprefixer": "^10.4.7",
+    "eslint-config-custom": "workspace:*",
+    "postcss": "^8.4.13",
+    "radix-colors-for-tailwind": "^2.0.0",
+    "sharp": "^0.30.1",
+    "tailwindcss": "^3.0.24",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.6.2"
+  }
+}
