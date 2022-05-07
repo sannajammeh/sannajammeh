@@ -54,7 +54,8 @@ export default function Index() {
               </h2>
             </div>
           </div>
-          <a
+          <button
+            role="link"
             className="absolute bottom-8 right-8 flex flex-col items-center gap-1 !cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
@@ -68,7 +69,7 @@ export default function Index() {
               There is more where that came from
             </span>
             <CgArrowDown className="animate-pulse" size="2rem" />
-          </a>
+          </button>
         </section>
         <Section.Root className="h-screen container mx-auto">
           <Section.Aside ref={asideRef}>
