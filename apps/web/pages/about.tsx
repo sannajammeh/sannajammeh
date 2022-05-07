@@ -16,10 +16,9 @@ export default function About() {
             />
           </figure>
           <div>
-            <h1>Sanna Jammeh</h1>
+            <blockquote>Coming soon...</blockquote>
           </div>
         </div>
-        <blockquote>Coming soon...</blockquote>
       </main>
     </Layout>
   );

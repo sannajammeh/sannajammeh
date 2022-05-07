@@ -5,6 +5,7 @@ import { Frontmatter } from "types/frontmatter";
 import { getAllFrontmatter } from "utils/mdx";
 import Layout from "../../components/Layout";
 import { sortBy } from "lodash-es";
+import { NextSeo } from "next-seo";
 
 interface Props {
   posts: Frontmatter[];
@@ -12,16 +13,19 @@ interface Props {
 
 const BlogArticles: NextPage<Props> = ({ posts }) => {
   return (
-    <Layout>
-      <main className="mx-auto px-4 pt-32 max-w-[65ch] xl:max-w-[75ch]">
-        {/* cards */}
-        <div className="grid grid-cols-1 gap-4">
-          {posts.map((post) => (
-            <Article frontmatter={post} key={post.slug} />
-          ))}
-        </div>
-      </main>
-    </Layout>
+    <>
+      <NextSeo title="Blogs | Sanna Jammeh" />
+      <Layout>
+        <main className="mx-auto px-4 pt-32 max-w-[65ch] xl:max-w-[75ch]">
+          {/* cards */}
+          <div className="grid grid-cols-1 gap-4">
+            {posts.map((post) => (
+              <Article frontmatter={post} key={post.slug} />
+            ))}
+          </div>
+        </main>
+      </Layout>
+    </>
   );
 };
 
