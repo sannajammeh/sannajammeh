@@ -39,7 +39,7 @@ Here is how it works
 
 #### Creating the blurred image
 
-```js
+```ts
 // utils/image.ts
 
 const ROOT_PATH = process.cwd(); // The root path of the project
@@ -73,32 +73,32 @@ export const getBlurDataURL = async (url: string) => {
 
 #### Usage
 
-```js
+```tsx
 // pages/index.tsx
 
 export const getStaticProps = () => {
-    const data = await api.homePageData() // Image url provided from external source or markdown file
+  const data = await api.homePageData(); // Image url provided from external source or markdown file
 
-    return {
-        props: {
-            image: data.image,
-            blurDataURL: await getBlurDataURL(data.image),
-        }
-    }
-}
+  return {
+    props: {
+      image: data.image,
+      blurDataURL: await getBlurDataURL(data.image),
+    },
+  };
+};
 
 interface HomeProps {
-    image: string;
-    blurDataURL: string;
+  image: string;
+  blurDataURL: string;
 }
 
-const Home: NextPage<HomeProps> = ({image, blurDataURL}) => {
-    return (
-        <div>
-            <Image src={image} placeholder="blur" blurDataURL={blurDataURL} />
-        </div>
-    )
-}
+const Home: NextPage<HomeProps> = ({ image, blurDataURL }) => {
+  return (
+    <div>
+      <Image src={image} placeholder="blur" blurDataURL={blurDataURL} />
+    </div>
+  );
+};
 
 export default Home;
 ```
