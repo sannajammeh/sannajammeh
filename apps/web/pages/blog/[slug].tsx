@@ -33,7 +33,7 @@ const BlogEntry: NextPage<Props> = ({ frontmatter, code, blurDataURL }) => {
         }}
       />
       <Layout>
-        <main className="mx-auto px-4 pt-32 prose prose-invert xl:max-w-[75ch]">
+        <main className="mx-auto px-4 pt-32 prose prose-invert xl:max-w-[75ch] mb-16">
           {frontmatter.mainImage && (
             <div className="relative aspect-video mb-4">
               <Image
