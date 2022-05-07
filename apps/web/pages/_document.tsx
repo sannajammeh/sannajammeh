@@ -7,6 +7,10 @@ class PageDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta
             name="description"
             content="Sanna Jammeh is a fullstack developer based in Oslo, Norway, with a passion for design and complex applications."
           />
