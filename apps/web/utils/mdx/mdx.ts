@@ -4,8 +4,9 @@ import glob from "glob";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { bundleMDX } from "mdx-bundler";
-
+import rehypePrism from "rehype-prism-plus";
 import type { Frontmatter } from "types/frontmatter";
+import sharp from "sharp";
 
 const ROOT_PATH = process.cwd();
 export const DATA_PATH = path.join(ROOT_PATH, "posts");
@@ -41,6 +42,11 @@ export const getMdxBySlug = async (basePath, slug) => {
   );
   const { frontmatter, code } = await bundleMDX({
     source,
+    mdxOptions(options, frontmatter) {
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism];
+
+      return options;
+    },
   });
 
   return {
@@ -52,4 +58,26 @@ export const getMdxBySlug = async (basePath, slug) => {
     } as Frontmatter,
     code,
   };
+};
+
+export const getBlurDataURL = async (url: string) => {
+  let source: string | Buffer;
+  if (url.startsWith("http")) {
+    source = Buffer.from(await (await fetch(url)).arrayBuffer());
+  } else {
+    source = path.join(ROOT_PATH, "public", url);
+  }
+
+  const image = await sharp(source)
+    .resize(16, 9, {
+      fit: "cover",
+    })
+    .jpeg()
+    .toBuffer();
+
+  return bufferToDataURL(image);
+};
+
+const bufferToDataURL = (buffer: Buffer) => {
+  return `data:image/jpeg;base64,${buffer.toString("base64")}`;
 };

@@ -11,4 +11,5 @@ export type Frontmatter = {
   mainImage: string;
   modified: number;
   created: number;
+  tags?: string[];
 };
