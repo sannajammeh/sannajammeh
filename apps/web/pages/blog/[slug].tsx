@@ -85,5 +85,5 @@ const getFullImageUrl = (url: string) => {
   if (url.startsWith("http")) {
     return url;
   }
-  return new URL(url, import.meta.url).href;
+  return new URL(url, "https://sannajammeh.com").href;
 };
