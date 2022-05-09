@@ -58,6 +58,7 @@ importers:
       glob: ^8.0.1
       gray-matter: ^4.0.3
       hast-util-to-string: ^2.0.0
+      infinite-react-carousel: ^1.2.11
       lodash-es: ^4.17.21
       mdx-bundler: ^9.0.0
       next: ^12.1.0
@@ -93,6 +94,7 @@ importers:
       glob: 8.0.1
       gray-matter: 4.0.3
       hast-util-to-string: 2.0.0
+      infinite-react-carousel: 1.2.11_ef5jwxihqo6n7gxfmzogljlgcm
       lodash-es: 4.17.21
       mdx-bundler: 9.0.0_esbuild@0.14.38
       next: 12.1.6_achxnsjje7b5gy3iikucscdeta
@@ -4533,6 +4535,14 @@ packages:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
     dev: false
 
+  /babel-polyfill/6.26.0:
+    resolution: {integrity: sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=}
+    dependencies:
+      babel-runtime: 6.26.0
+      core-js: 2.6.12
+      regenerator-runtime: 0.10.5
+    dev: false
+
   /babel-runtime/6.26.0:
     resolution: {integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=}
     dependencies:
@@ -8202,6 +8212,21 @@ packages:
 
   /indexes-of/1.0.1:
     resolution: {integrity: sha1-8w9xbI4r00bHtn0985FVZqfAVgc=}
+    dev: false
+
+  /infinite-react-carousel/1.2.11_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-7MUNP+eh/6Eud+TViz0HYYvLJq/2CVsdMf9J9X/Ag9jRs/eb319vBpHvNEb0TtmbqrNbnSGHG0D3fVy41edy0g==}
+    peerDependencies:
+      react: ^16.0.0
+      react-dom: ^16.0.0
+    dependencies:
+      babel-polyfill: 6.26.0
+      classnames: 2.3.1
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      resize-observer-polyfill: 1.5.1
     dev: false
 
   /inflight/1.0.6:
@@ -12220,6 +12245,10 @@ packages:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
     dev: false
 
+  /regenerator-runtime/0.10.5:
+    resolution: {integrity: sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=}
+    dev: false
+
   /regenerator-runtime/0.11.1:
     resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
     dev: false
@@ -12447,6 +12476,10 @@ packages:
 
   /requires-port/1.0.0:
     resolution: {integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=}
+    dev: false
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
     dev: false
 
   /resolve-from/1.0.1:

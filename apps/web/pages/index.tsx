@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { ComponentType, Suspense } from "react";
+import { ComponentType, lazy, Suspense } from "react";
 import Layout from "../components/Layout";
 import { CgArrowDown } from "react-icons/cg";
 import * as Section from "../components/section";
@@ -29,9 +29,8 @@ import IconButton from "components/icon-button";
 import Link from "next/link";
 import Button from "components/button";
 
-const Wave = dynamic(() => import("../components/Wave"), {
-  suspense: true,
-}) as ComponentType;
+const Wave = lazy(() => import("components/Wave"));
+const SkillSlider = lazy(() => import("components/skill-slider"));
 
 export default function Index() {
   const { ref: titleRef } = useParallax<HTMLDivElement>({
@@ -181,18 +180,11 @@ export default function Index() {
               </div>
             </Parallax>
           </Section.Content>
-          {/* <Section.Content fullWidth className="pb-16">
-            <div className="flex flex-wrap gap-12 items-center filter grayscale opacity-60">
-              <Suspense>
-                <Vercel />
-                <NextJSLogo />
-                <Supabase />
-                <Figma />
-                <TSLogo />
-                <JSLogo />
-              </Suspense>
-            </div>
-          </Section.Content> */}
+          <Section.Content fullWidth className="pb-32">
+            <Suspense>
+              <SkillSlider />
+            </Suspense>
+          </Section.Content>
         </Section.Root>
         <Section.Root className="mb-16">
           <Section.Aside ref={proofAsideRef}>
@@ -209,7 +201,6 @@ export default function Index() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16">
               <Card.Root className="col-span-1">
                 <Card.Border />
-
                 <Card.Content>
                   <figure className="prose prose-invert !max-w-max">
                     <div className="not-prose p-2 border-dashed border-radix-slate9 border w-max mx-auto rounded-full mb-2">
