@@ -73,7 +73,7 @@ const SectionNumber = ({
   return (
     <span
       className={clsx(
-        "text-[calc(18rem)] text-bordered font-bold leading-none",
+        "text-[16rem] md:text-[calc(18rem)] text-bordered font-bold leading-none",
         className
       )}
       {...props}
@@ -110,12 +110,14 @@ const SectionContent = ({
 const SectionRoot = ({
   className,
   children,
+  fullWidth,
   ...props
-}: HTMLProps<HTMLDivElement>) => {
+}: HTMLProps<HTMLDivElement> & { fullWidth?: boolean }) => {
   return (
     <section
       className={clsx(
-        "container mx-auto xl:grid grid-cols-[3fr,_7fr] gap-4",
+        "mx-auto xl:grid grid-cols-[3fr,_7fr] gap-4",
+        !fullWidth && "container",
         className
       )}
       {...props}

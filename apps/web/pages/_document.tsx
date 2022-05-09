@@ -7,15 +7,11 @@ class PageDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta
             name="description"
             content="Sanna Jammeh is a fullstack developer based in Oslo, Norway, with a passion for design and complex applications."
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
             rel="stylesheet"
           />
           <link

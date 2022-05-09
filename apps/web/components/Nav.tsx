@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 import { FiGithub } from "react-icons/fi";
+import clsx from "clsx";
 
 export default function Nav() {
   const router = useRouter();
@@ -22,7 +23,12 @@ export default function Nav() {
   }, []);
 
   return (
-    <div className={`absolute top-0 left-0 w-full z-50`}>
+    <div
+      className={clsx(
+        `top-0 left-0 w-full z-50`,
+        router.pathname === "/" ? "absolute" : "sticky"
+      )}
+    >
       <header className="mx-auto py-4 container font-bold font-space-mono">
         <nav className="w-full flex justify-between">
           <div>

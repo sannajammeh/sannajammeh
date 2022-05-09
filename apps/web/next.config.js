@@ -13,6 +13,11 @@ const config = {
       "api.daily.dev",
     ],
   },
+  experimental: {
+    images: {
+      layoutRaw: true,
+    },
+  },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
