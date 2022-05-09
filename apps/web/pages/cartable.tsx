@@ -126,7 +126,7 @@ const Cartable = () => {
         </section>
 
         <section className="container mx-auto mt-24 lg:h-screen grid place-items-center">
-          <div className="grid grid-cols-2">
+          <div className="md:grid grid-cols-2">
             <Parallax speed={10} opacity={[0.5, 1]}>
               <div>
                 <GiSpeedometer className="text-8xl" />
