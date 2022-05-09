@@ -27,15 +27,19 @@ const Privatek = () => {
             objectFit="contain"
           />
           <div className="prose prose-invert md:max-w-[75ch]">
-            <h1 className="">Website development for Privatek UB</h1>
+            <h1 className="">Web development & UI/UX for Privatek UB</h1>
             <p>
               Try to imagine what a breach of privacy would feel like. This is
               exactly what Privatek&apos;s Slider™ aims to solve. A seamless
               metal webcam cover which blends perfectly with the color of your
               MacBook or laptop. A perfect replacement for the ugly piece of
-              tape everyone has on their device. Privatek went on the win the
-              “best website” award at the Regional and National young
-              entrepreneur championship.
+              tape everyone has on their device. With my involvment developing
+              the site - Privatek went on the win the{" "}
+              <b>
+                <i>best website</i>
+              </b>{" "}
+              award at the Regional and National young entrepreneur
+              championship.
             </p>
             <div className="flex gap-16">
               <div>

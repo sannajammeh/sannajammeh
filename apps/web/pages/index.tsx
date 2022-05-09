@@ -1,19 +1,10 @@
-import dynamic from "next/dynamic";
-import { ComponentType, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import Layout from "../components/Layout";
 import { CgArrowDown } from "react-icons/cg";
 import * as Section from "../components/section";
 import * as Card from "components/card";
 import { Parallax, useParallax } from "react-scroll-parallax";
 import { SiFigma, SiNestjs, SiReact } from "react-icons/si";
-
-// Logos
-import Vercel from "components/logo/vercel";
-import NextJSLogo from "components/logo/nextjs";
-import TSLogo from "components/logo/typescript";
-import JSLogo from "components/logo/javascript";
-import Supabase from "components/logo/supabase";
-import Figma from "components/logo/figma";
 import { NextSeo } from "next-seo";
 import {
   FiGithub,
@@ -22,12 +13,13 @@ import {
   FiMail,
   FiTwitter,
 } from "react-icons/fi";
-
-import emilie from "public/images/emilie.jpeg";
+import Button from "components/button";
 import Image from "next/image";
 import IconButton from "components/icon-button";
 import Link from "next/link";
-import Button from "components/button";
+
+import emilie from "public/images/emilie.jpeg";
+import shad from "public/images/shad.jpeg";
 
 const Wave = lazy(() => import("components/Wave"));
 const SkillSlider = lazy(() => import("components/skill-slider"));
@@ -180,13 +172,13 @@ export default function Index() {
               </div>
             </Parallax>
           </Section.Content>
-          <Section.Content fullWidth className="pb-32">
+          <Section.Content fullWidth className="pb-32 pt-24">
             <Suspense>
               <SkillSlider />
             </Suspense>
           </Section.Content>
         </Section.Root>
-        <Section.Root className="mb-16">
+        <Section.Root className="mb-16 min-h-screen !grid-cols-[1fr,_1fr] flex-wrap">
           <Section.Aside ref={proofAsideRef}>
             <Section.Number>03</Section.Number>
             <Section.Title>
@@ -197,8 +189,59 @@ export default function Index() {
               Have a look at what these clients have said about me.
             </Section.Description>
           </Section.Aside>
-          <Section.Content fullWidth>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16">
+          <Section.Content className="pt-24 h-max">
+            <Card.Root>
+              <Card.Border />
+              <Card.Content>
+                <figure className="prose prose-invert !max-w-max">
+                  <div className="not-prose p-2 border-dashed border-radix-slate9 border w-max mx-auto rounded-full mb-2">
+                    <Image
+                      src={shad}
+                      placeholder="blur"
+                      loading="lazy"
+                      width={60}
+                      height={60}
+                      className="object-cover rounded-full"
+                      layout="raw"
+                      alt="Emilie avatar"
+                    />
+                  </div>
+                  <div className="flex flex-wrap items-center mb-4 gap-2 not-prose">
+                    <div className="flex items-center">
+                      {`</>`}
+                      <p className="leading-tight">
+                        Lead developer <br />
+                        <small className="text-radix-slate11">
+                          @ Cartable Nordic Ltd.
+                        </small>
+                      </p>
+                    </div>
+                    <Link href="/cartable" passHref>
+                      <Button className="ml-auto">View case</Button>
+                    </Link>
+                  </div>
+                  <blockquote className="text-radix-slate11 leading-loose">
+                    Sanna has consistently delivered high-quality work for our
+                    and client's projects. He is a pleasure to work with and a
+                    pleasure to be around. He has great work ethic and is always
+                    ready to help. Working with Sanna we were able to develop
+                    our new course platform in record time. He's been a great
+                    addition to our team as the lead developer.
+                  </blockquote>
+                  <figcaption className="text-center">
+                    <span className="text-radix-slate12 text-lg font-medium text-center">
+                      Shad Ibrahim Hussein
+                    </span>
+                    <br />
+                    <span>CEO Cartable Nordic ltd.</span>
+                  </figcaption>
+                </figure>
+              </Card.Content>
+            </Card.Root>
+          </Section.Content>
+
+          <Section.Content>
+            <div className="grid grid-cols-1 gap-16 mt-16">
               <Card.Root className="col-span-1">
                 <Card.Border />
                 <Card.Content>
