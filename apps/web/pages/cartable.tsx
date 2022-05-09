@@ -62,6 +62,7 @@ const Cartable = () => {
           <Parallax speed={-10}>
             <figure className="opacity-80 lg:-mt-32 xl:-mt-64 pointer-events-none">
               <Image
+                placeholder="blur"
                 className="filter drop-shadow-md"
                 objectFit="contain"
                 src={mockup}
