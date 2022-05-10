@@ -31,3 +31,6 @@ yarn-error.log*
 
 # turbo
 .turbo
+apps/web/public/rss/atom.xml
+apps/web/public/rss/feed.json
+apps/web/public/rss/feed.xml

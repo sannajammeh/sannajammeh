@@ -63,6 +63,14 @@ export default function Index() {
               <h2 className="text-2xl font-medium lg:text-right">
                 I make cool sh#t that performs.
               </h2>
+              <div className="flex gap-4 -mt-8">
+                <Button href="/resume.pdf" target="_blank" className="!text-lg">
+                  Download my CV
+                </Button>
+                <Button href="#contact" className="!text-lg">
+                  Get in touch
+                </Button>
+              </div>
             </div>
           </div>
           <button
@@ -296,7 +304,7 @@ export default function Index() {
           </Section.Content>
         </Section.Root>
 
-        <section id="cta" className="relative py-24 md:py-0">
+        <section id="contact" className="relative py-24 md:py-0">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
               fill="none"

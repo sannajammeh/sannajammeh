@@ -8,6 +8,7 @@ import privatekCasesPage from "public/images/privatek-case-pages.png";
 import Button from "components/button";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { Parallax } from "react-scroll-parallax";
 
 const Privatek = () => {
   return (
@@ -83,9 +84,13 @@ const Privatek = () => {
             </div>
           </div>
         </section>
-        <figure className="aspect-video relative w-full">
-          <Image src={privatekCasesPage} layout="fill" placeholder="blur" />
-        </figure>
+        <div className="overflow-hidden w-full">
+          <Parallax translateX={["-100px", "50px"]} translateY={[-25, 25]}>
+            <figure className="aspect-video relative w-[calc(200px_+_100%)]">
+              <Image src={privatekCasesPage} layout="fill" placeholder="blur" />
+            </figure>
+          </Parallax>
+        </div>
         <section className="container mx-auto my-16 grid items-center">
           <Link href="/" passHref>
             <Button className="mx-auto">Back to home</Button>

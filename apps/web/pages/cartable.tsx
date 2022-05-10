@@ -10,11 +10,29 @@ import dualIphone from "public/images/dual-iphone.png";
 import * as Section from "components/section";
 import { Parallax, useParallax } from "react-scroll-parallax";
 import { GiSpeedometer } from "react-icons/gi";
+import Performance from "components/performance";
+
+import studio from "public/images/studio.png";
+import loginIphone from "public/images/login-iphone.png";
+import iphone from "public/images/iphone.png";
+import { useIsMobile } from "hooks/useMediaQuery";
 
 const Cartable = () => {
+  const isMobile = useIsMobile();
   const { ref: asideRef } = useParallax<HTMLDivElement>({
     speed: -10,
     opacity: [0, 1],
+  });
+
+  const { ref: iphoneRef } = useParallax<HTMLDivElement>({
+    speed: isMobile ? 30 : 20,
+  });
+  const { ref: iphone2Ref } = useParallax<HTMLDivElement>({
+    speed: isMobile ? 20 : 5,
+  });
+
+  const { ref: desktopRef } = useParallax<HTMLDivElement>({
+    speed: isMobile ? -20 : -10,
   });
   return (
     <>
@@ -59,7 +77,7 @@ const Cartable = () => {
           </div>
         </section>
         <section className="h-[50vh] xl:h-[125vh] grid items-center">
-          <Parallax speed={-10}>
+          <Parallax speed={5} opacity={[0, 1]} easing={"easeOutQuint"}>
             <figure className="opacity-80 lg:-mt-32 xl:-mt-64 pointer-events-none">
               <Image
                 placeholder="blur"
@@ -95,9 +113,9 @@ const Cartable = () => {
           <div className="md:grid grid-cols-12 gap-4">
             <Parallax
               className="col-span-8"
-              speed={-10}
+              speed={-5}
               opacity={[0, 1]}
-              easing="easeInOutQuad"
+              easing="easeOutQuint"
             >
               <div className="relative aspect-video filter opacity-80 drop-shadow-lg">
                 <Image
@@ -126,13 +144,16 @@ const Cartable = () => {
         </section>
 
         <section className="container mx-auto mt-24 lg:h-screen grid place-items-center">
-          <div className="md:grid grid-cols-2">
-            <Parallax speed={10} opacity={[0.5, 1]}>
+          <div className="md:grid grid-cols-2 gap-4 md:gap-8">
+            <Parallax speed={5} opacity={[0.5, 1]}>
               <div>
                 <GiSpeedometer className="text-8xl" />
                 <span className="dashed-x h-1 w-full md:w-full block my-6"></span>
                 <h1 className="text-3xl font-bold uppercase mb-8 italic">
-                  Performance, performance, performance.
+                  <span className="hidden md:inline-block">
+                    Performance, performance,{" "}
+                  </span>{" "}
+                  performance<span className="hidden md:inline-block">.</span>
                 </h1>
                 <p className="text-2xl max-w-[65ch]">
                   From database queries, page load times, to user experience,
@@ -141,8 +162,96 @@ const Cartable = () => {
                 </p>
               </div>
             </Parallax>
+            <div className="flex justify-between items-center mt-16 md:mt-0">
+              <div className="flex flex-col items-center">
+                <Performance score={98} />
+                <p className="font-bold text-lg">Performance</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <Performance score={100} />
+                <p className="font-bold text-lg">Accessibility</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <Performance score={100} />
+                <p className="font-bold text-lg">SEO</p>
+              </div>
+            </div>
           </div>
         </section>
+        <section className="container mx-auto mt-48 md:mt-24">
+          <div className="relative w-full md:w-[70%] aspect-video mx-auto shadow-md shadow-radix-slate3 rounded-lg">
+            <div className="relative w-full aspect-video" ref={desktopRef}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={studio}
+                placeholder="blur"
+              />
+            </div>
+            <div
+              className="absolute aspect-[9/18] h-[300px] md:h-[400px] left-0 md:left-[10%] shadow-md bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
+              ref={iphoneRef}
+            >
+              <Image
+                src={loginIphone}
+                placeholder="blur"
+                objectFit="cover"
+                layout="fill"
+              />
+            </div>
+            <div
+              className="absolute aspect-[9/18] h-[300px]  md:h-[400px] shadow-md right-0 md:right-[10%] bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
+              ref={iphone2Ref}
+            >
+              <Image
+                src={iphone}
+                placeholder="blur"
+                objectFit="cover"
+                objectPosition="top"
+                layout="fill"
+              />
+            </div>
+          </div>
+        </section>
+        <Section.Root className="mt-24">
+          <Section.Aside>
+            <Section.Number>02</Section.Number>
+            <Section.Title>
+              Some
+              <br />
+              Numbers
+            </Section.Title>
+            <Section.Description>For those who care</Section.Description>
+          </Section.Aside>
+          <Section.Content className="text-2xl md:text-4xl flex flex-col gap-6 pt-24 leading-normal">
+            <p>The end result of three months of hard work and counting.</p>
+            <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 md:gap-y-28">
+              <div>
+                <span className="font-bold font-space-mono text-8xl">
+                  17.6K
+                </span>
+                <span className="dashed-x h-1 md:w-full block my-6"></span>
+                <span className="font-bold font-space-mono uppercase">
+                  Lines of code added
+                </span>
+              </div>
+              <div>
+                <span className="font-bold font-space-mono text-8xl">13+</span>
+                <span className="dashed-x h-1 md:w-full block my-6"></span>
+                <span className="font-bold font-space-mono uppercase">
+                  Pages built
+                </span>
+              </div>
+              <div className="md:col-start-2">
+                <span className="font-bold font-space-mono text-8xl">270+</span>
+                <span className="dashed-x h-1 md:w-full block my-6"></span>
+                <span className="font-bold font-space-mono uppercase">
+                  Commits
+                </span>
+              </div>
+            </div>
+          </Section.Content>
+        </Section.Root>
         <section className="container mx-auto my-16 grid items-center">
           <Link href="/" passHref>
             <Button className="mx-auto">Back to home</Button>

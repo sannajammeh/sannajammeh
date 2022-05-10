@@ -6,7 +6,7 @@ import { Frontmatter } from "types/frontmatter";
 import { getMDXComponent } from "mdx-bundler/client";
 import Image from "next/image";
 import AtomDarkPrism from "styles/atomDarkPrism";
-import { NextSeo } from "next-seo";
+import { NextSeo, ArticleJsonLd } from "next-seo";
 
 interface Props {
   frontmatter: Frontmatter;
@@ -17,7 +17,7 @@ interface Props {
 const BlogEntry: NextPage<Props> = ({ frontmatter, code, blurDataURL }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  const { title, description, tags, mainImage } = frontmatter;
+  const { title, description, tags, mainImage, slug } = frontmatter;
 
   return (
     <>
@@ -31,6 +31,15 @@ const BlogEntry: NextPage<Props> = ({ frontmatter, code, blurDataURL }) => {
             },
           ],
         }}
+      />
+      <ArticleJsonLd
+        type="Blog"
+        title={title}
+        description={description}
+        url={`https://sannajammeh.com/blog/${slug}`}
+        images={[getFullImageUrl(mainImage)]}
+        authorName="Sanna Jammeh"
+        datePublished={frontmatter.publishedAt}
       />
       <Layout>
         <main className="mx-auto px-4 pt-32 prose prose-invert xl:max-w-[75ch] mb-16">

@@ -116,7 +116,7 @@ const SectionRoot = ({
   return (
     <section
       className={clsx(
-        "mx-auto xl:grid grid-cols-[3fr,_7fr] gap-4",
+        "mx-auto xl:grid grid-cols-[4fr,_7fr] gap-4",
         !fullWidth && "container",
         className
       )}

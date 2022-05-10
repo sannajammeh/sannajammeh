@@ -25,6 +25,7 @@ export const getAllFrontmatter = (fromPath) => {
 
       return {
         ...(data as Frontmatter),
+        publishedAt: stringToDate(data.publishedAt).toISOString(),
         slug: path.basename(filePath).replace(".mdx", ""), // file name without extension
         wordCount: content.split(/\s+/g).length,
         readingTime: readingTime(content),
@@ -40,9 +41,10 @@ export const getMdxBySlug = async (basePath, slug) => {
     path.join(DATA_PATH, basePath, `${slug}.mdx`),
     "utf8"
   );
+
   const { frontmatter, code } = await bundleMDX({
     source,
-    mdxOptions(options, frontmatter) {
+    mdxOptions(options) {
       options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism];
 
       return options;
@@ -52,6 +54,7 @@ export const getMdxBySlug = async (basePath, slug) => {
   return {
     frontmatter: {
       ...(frontmatter as Frontmatter),
+      publishedAt: stringToDate(frontmatter.publishedAt).toISOString(),
       slug,
       wordCount: code.split(/\s+/g).length,
       readingTime: readingTime(code),
@@ -80,4 +83,9 @@ export const getBlurDataURL = async (url: string) => {
 
 const bufferToDataURL = (buffer: Buffer) => {
   return `data:image/jpeg;base64,${buffer.toString("base64")}`;
+};
+
+const stringToDate = (dateString: string) => {
+  const [day, month, year] = dateString.split("/");
+  return new Date([month, day, year].join("/"));
 };

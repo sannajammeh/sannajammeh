@@ -6,6 +6,7 @@ import { getAllFrontmatter } from "utils/mdx";
 import Layout from "../../components/Layout";
 import { sortBy } from "lodash-es";
 import { NextSeo } from "next-seo";
+import { generateRSS } from "utils/rss";
 
 interface Props {
   posts: Frontmatter[];
@@ -35,6 +36,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = await getAllFrontmatter("");
 
   const sortedPosts = sortBy(posts, "created").reverse();
+
+  await generateRSS(posts);
 
   return {
     props: {
