@@ -3,8 +3,6 @@ import { Frontmatter } from "types/frontmatter";
 import fs from "fs/promises";
 
 export const generateRSS = async (posts: Frontmatter[]) => {
-  const p1 = performance.now();
-
   const author = {
     name: "Sanna Jammeh",
     email: "hello@sannajammeh.com",
@@ -51,9 +49,5 @@ export const generateRSS = async (posts: Frontmatter[]) => {
     fs.writeFile("./public/rss/feed.json", feed.json1()),
   ]);
 
-  const p2 = performance.now();
-
-  const seconds = (p2 - p1) / 1000;
-
-  console.log("RSS:", "Generated all RSS feeds in ", seconds, "s");
+  console.log("RSS:", "Generated all RSS feeds");
 };
