@@ -63,7 +63,7 @@ export default function Index() {
               <h2 className="text-2xl font-medium lg:text-right">
                 I make cool sh#t that performs.
               </h2>
-              <div className="flex gap-4 -mt-8">
+              <div className="flex gap-4 mt-4 md:-mt-8">
                 <Button href="/resume.pdf" target="_blank" className="!text-lg">
                   Download my CV
                 </Button>
@@ -230,11 +230,11 @@ export default function Index() {
                   </div>
                   <blockquote className="text-radix-slate11 leading-loose">
                     Sanna has consistently delivered high-quality work for our
-                    and client's projects. He is a pleasure to work with and a
-                    pleasure to be around. He has great work ethic and is always
-                    ready to help. Working with Sanna we were able to develop
-                    our new course platform in record time. He's been a great
-                    addition to our team as the lead developer.
+                    and client&apos;s projects. He is a pleasure to work with
+                    and a pleasure to be around. He has great work ethic and is
+                    always ready to help. Working with Sanna we were able to
+                    develop our new course platform in record time. He&apos;s
+                    been a great addition to our team as the lead developer.
                   </blockquote>
                   <figcaption className="text-center">
                     <span className="text-radix-slate12 text-lg font-medium text-center">

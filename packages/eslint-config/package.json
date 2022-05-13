@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config-custom",
+  "name": "eslint-config",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,5 +10,9 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "files": [
+    "index.js",
+    "next.js"
+  ]
 }
