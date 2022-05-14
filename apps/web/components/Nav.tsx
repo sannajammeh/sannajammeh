@@ -44,9 +44,9 @@ export default function Nav() {
             >
               Blog
             </NavItem>
-            <NavItem title="About" href="/about">
+            {/* <NavItem title="About" href="/about">
               About
-            </NavItem>
+            </NavItem> */}
             <a
               className="leading-none"
               href="https://github.com/sannajammeh"

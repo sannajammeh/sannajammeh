@@ -12,6 +12,7 @@ const config = {
       "images.unsplash.com",
       "api.daily.dev",
     ],
+    formats: ["image/avif", "image/webp"],
   },
   experimental: {
     images: {
