@@ -13,6 +13,7 @@ import { GiSpeedometer } from "react-icons/gi";
 import Performance from "components/performance";
 
 import studio from "public/images/studio.png";
+import lightStudio from "public/images/create-course.png";
 import loginIphone from "public/images/login-iphone.png";
 import iphone from "public/images/iphone.png";
 import { useIsMobile } from "hooks/useMediaQuery";
@@ -25,14 +26,14 @@ const Cartable = () => {
   });
 
   const { ref: iphoneRef } = useParallax<HTMLDivElement>({
-    speed: isMobile ? 30 : 20,
+    speed: isMobile ? 10 : 20,
   });
   const { ref: iphone2Ref } = useParallax<HTMLDivElement>({
-    speed: isMobile ? 20 : 5,
+    speed: isMobile ? 5 : 5,
   });
 
   const { ref: desktopRef } = useParallax<HTMLDivElement>({
-    speed: isMobile ? -20 : -10,
+    speed: isMobile ? -3 : -10,
   });
   return (
     <>
@@ -142,6 +143,41 @@ const Cartable = () => {
             </div>
           </div>
         </section>
+        <section className="container mx-auto h-screen grid place-items-center md:mt-24">
+          <div className="relative w-full md:w-[70%] aspect-video mx-auto rounded-lg">
+            <div className="relative w-full aspect-video" ref={desktopRef}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={lightStudio}
+                placeholder="blur"
+              />
+            </div>
+            <div
+              className="absolute aspect-[9/18] h-[250px] md:h-[400px] left-0 md:left-[10%] shadow-md bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
+              ref={iphoneRef}
+            >
+              <Image
+                src={loginIphone}
+                placeholder="blur"
+                objectFit="cover"
+                layout="fill"
+              />
+            </div>
+            <div
+              className="absolute aspect-[9/18] h-[250px]  md:h-[400px] shadow-md right-0 md:right-[10%] bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
+              ref={iphone2Ref}
+            >
+              <Image
+                src={iphone}
+                placeholder="blur"
+                objectFit="cover"
+                objectPosition="top"
+                layout="fill"
+              />
+            </div>
+          </div>
+        </section>
 
         <section className="container mx-auto mt-24 lg:h-screen grid place-items-center">
           <div className="md:grid grid-cols-2 gap-4 md:gap-8">
@@ -178,41 +214,7 @@ const Cartable = () => {
             </div>
           </div>
         </section>
-        <section className="container mx-auto mt-48 md:mt-24">
-          <div className="relative w-full md:w-[70%] aspect-video mx-auto shadow-md shadow-radix-slate3 rounded-lg">
-            <div className="relative w-full aspect-video" ref={desktopRef}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={studio}
-                placeholder="blur"
-              />
-            </div>
-            <div
-              className="absolute aspect-[9/18] h-[300px] md:h-[400px] left-0 md:left-[10%] shadow-md bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
-              ref={iphoneRef}
-            >
-              <Image
-                src={loginIphone}
-                placeholder="blur"
-                objectFit="cover"
-                layout="fill"
-              />
-            </div>
-            <div
-              className="absolute aspect-[9/18] h-[300px]  md:h-[400px] shadow-md right-0 md:right-[10%] bottom-0 shadow-radix-slate3 rounded-lg overflow-hidden"
-              ref={iphone2Ref}
-            >
-              <Image
-                src={iphone}
-                placeholder="blur"
-                objectFit="cover"
-                objectPosition="top"
-                layout="fill"
-              />
-            </div>
-          </div>
-        </section>
+
         <Section.Root className="mt-24">
           <Section.Aside>
             <Section.Number>02</Section.Number>

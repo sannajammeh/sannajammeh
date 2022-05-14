@@ -30,7 +30,7 @@ export default function Index() {
   });
 
   const { ref: asideRef } = useParallax<HTMLDivElement>({
-    speed: -10,
+    speed: -5,
     opacity: [0, 1],
   });
 
@@ -90,7 +90,7 @@ export default function Index() {
             <CgArrowDown className="animate-pulse" size="2rem" />
           </button>
         </section>
-        <Section.Root className="h-screen container mx-auto">
+        <Section.Root className="min-h-screen container mx-auto">
           <Section.Aside ref={asideRef}>
             <Section.Number>01</Section.Number>
             <Section.Title>
