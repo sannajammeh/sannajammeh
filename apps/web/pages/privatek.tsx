@@ -9,6 +9,7 @@ import Button from "components/button";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { Parallax } from "react-scroll-parallax";
+import CaseLayout from "components/case/case-layout";
 
 const Privatek = () => {
   return (
@@ -17,7 +18,7 @@ const Privatek = () => {
         title="Privatek - Sanna Jammeh"
         description="Case study of my role with Privatek UB"
       />
-      <Layout>
+      <>
         <section className="container mx-auto mt-32 mb-32">
           <Image
             src={privatekLogo}
@@ -91,14 +92,11 @@ const Privatek = () => {
             </figure>
           </Parallax>
         </div>
-        <section className="container mx-auto my-16 grid items-center">
-          <Link href="/" passHref>
-            <Button className="mx-auto">Back to home</Button>
-          </Link>
-        </section>
-      </Layout>
+      </>
     </>
   );
 };
+
+Privatek.getLayout = (page) => <CaseLayout>{page}</CaseLayout>;
 
 export default Privatek;

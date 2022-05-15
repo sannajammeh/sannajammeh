@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-
 import Nav from "./Nav";
 
 import "smooth-scrollbar/dist/smooth-scrollbar.css";

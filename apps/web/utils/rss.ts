@@ -16,6 +16,7 @@ export const generateRSS = async (posts: Frontmatter[]) => {
   const feed = new Feed({
     title: "Sanna Jammeh's blog",
     description: "Sanna Jammeh | Fullstack developer",
+    link: `${siteURL}/blog`,
     id: "https://sannajammeh.com",
     copyright: `All rights reserved ${date.getFullYear()}, Sanna Jammeh`,
     updated: date,

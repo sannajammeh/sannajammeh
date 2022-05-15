@@ -7,6 +7,8 @@ import Layout from "../../components/Layout";
 import { sortBy } from "lodash-es";
 import { NextSeo } from "next-seo";
 import { generateRSS } from "utils/rss";
+import Image from "next/image";
+import clsx from "clsx";
 
 interface Props {
   posts: Frontmatter[];
@@ -19,7 +21,7 @@ const BlogArticles: NextPage<Props> = ({ posts }) => {
       <Layout>
         <main className="mx-auto px-4 pt-32 max-w-[65ch] xl:max-w-[75ch]">
           {/* cards */}
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {posts.map((post) => (
               <Article frontmatter={post} key={post.slug} />
             ))}
@@ -47,27 +49,39 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
+  const date = new Date(frontmatter.publishedAt);
   return (
     <Link href={`/blog/${frontmatter.slug}`} passHref>
-      <div
-        className="flex hover:bg-radix-blue3 items-center gap-4 group cursor-pointer transition-all rounded"
+      <article
         role="link"
+        className="group rounded-lg overflow-hidden relative"
       >
-        <img
-          className="aspect-[2/3] max-w-[64px] rounded object-cover flex-shrink-0"
-          src={
-            frontmatter.mainImage ||
-            "https://images.unsplash.com/photo-1651719500430-630f9d7abd7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=668&q=80"
-          }
-          alt=""
-        />
-        <div className="flex-1">
-          <h2 className="text-xl font-semibold group-hover:text-radix-blue11 transition-all">
-            {frontmatter.title}
-          </h2>
-          <p className="text-gray-600 text-base">{frontmatter.description}</p>
+        <div className="aspect-video relative">
+          <Image src={frontmatter.mainImage} sizes="30vw" layout="fill" />
         </div>
-      </div>
+        <div className="flex group-hover:bg-radix-blue3 items-center gap-4 group cursor-pointer transition-all rounded-b-lg p-2">
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold group-hover:text-radix-blue11 transition-all">
+              {frontmatter.title}
+            </h2>
+            <p className="text-radix-slate11 text-base">
+              {frontmatter.description}
+            </p>
+          </div>
+          <span
+            className={clsx(
+              "bg-radix-slate1 top-0 right-0 px-2 py-1 text-xs rounded-bl-lg",
+              {
+                absolute: frontmatter.mainImage,
+              }
+            )}
+          >
+            <time dateTime={date.toISOString()}>
+              {date.toLocaleDateString("no-NB")}
+            </time>
+          </span>
+        </div>
+      </article>
     </Link>
   );
 };

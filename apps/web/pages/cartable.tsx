@@ -11,12 +11,12 @@ import * as Section from "components/section";
 import { Parallax, useParallax } from "react-scroll-parallax";
 import { GiSpeedometer } from "react-icons/gi";
 import Performance from "components/performance";
-
-import studio from "public/images/studio.png";
 import lightStudio from "public/images/create-course.png";
 import loginIphone from "public/images/login-iphone.png";
 import iphone from "public/images/iphone.png";
 import { useIsMobile } from "hooks/useMediaQuery";
+import ProjectList from "components/project-list";
+import CaseLayout from "components/case/case-layout";
 
 const Cartable = () => {
   const isMobile = useIsMobile();
@@ -41,7 +41,7 @@ const Cartable = () => {
         title="Cartable - Sanna Jammeh"
         description="Case study of my role with Cartable Nordic Ltd."
       />
-      <Layout>
+      <>
         <section className="container mx-auto mt-32 mb-32">
           <SiCodio size="100px" className="mb-16" />
           <div className="prose prose-invert md:max-w-[75ch]">
@@ -254,14 +254,11 @@ const Cartable = () => {
             </div>
           </Section.Content>
         </Section.Root>
-        <section className="container mx-auto my-16 grid items-center">
-          <Link href="/" passHref>
-            <Button className="mx-auto">Back to home</Button>
-          </Link>
-        </section>
-      </Layout>
+      </>
     </>
   );
 };
+
+Cartable.getLayout = (page) => <CaseLayout>{page}</CaseLayout>;
 
 export default Cartable;
