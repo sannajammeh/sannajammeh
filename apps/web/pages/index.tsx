@@ -102,15 +102,15 @@ export default function Index() {
             <Parallax speed={5} opacity={[0, 1]}>
               <p>
                 I think that tight collaboration between design, research, and
-                front-end engineering leads to excellent consumer experiences in
-                digital goods.
+                full-stack engineering leads to excellent consumer experiences
+                in digital goods.
               </p>
             </Parallax>
             <Parallax speed={5} opacity={[0, 1]}>
               <p>
                 I aim to bridge the gap between design and engineering
                 disciplines and function as a catalyst for quick, iterative
-                design processes within agile product teams as an expert in
+                engineering processes within agile product teams as an expert in
                 modular design systems and component libraries.
               </p>
             </Parallax>
