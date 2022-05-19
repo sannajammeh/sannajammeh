@@ -17,7 +17,7 @@ interface Props {
 const BlogEntry: NextPage<Props> = ({ frontmatter, code, blurDataURL }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  const { title, description, tags, mainImage, slug } = frontmatter;
+  const { title, description, mainImage, slug } = frontmatter;
 
   return (
     <>
@@ -52,6 +52,7 @@ const BlogEntry: NextPage<Props> = ({ frontmatter, code, blurDataURL }) => {
                 blurDataURL={blurDataURL}
                 layout="fill"
                 objectFit="cover"
+                alt="main image"
               />
             </div>
           )}

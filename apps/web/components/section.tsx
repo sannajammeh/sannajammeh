@@ -1,6 +1,6 @@
 import { forwardRef, HTMLProps, useId, useMemo } from "react";
 import clsx from "clsx";
-import { pickChildByProps, pickChildByType } from "../utils/children";
+import { pickChildByProps } from "../utils/children";
 
 const SectionAside = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   ({ children, className, ...props }, ref) => {

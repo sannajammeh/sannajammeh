@@ -20,7 +20,7 @@ export default function Nav() {
       router.events.off("routeChangeComplete", stopProgressBar);
       router.events.off("routeChangeError", stopProgressBar);
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <div
@@ -52,6 +52,7 @@ export default function Nav() {
               href="https://github.com/sannajammeh"
               target="_blank"
               title="GitHub"
+              rel="noreferrer"
             >
               <span className="hidden md:inline-block">GitHub</span>
               <FiGithub className="md:hidden" size="1.25rem" />

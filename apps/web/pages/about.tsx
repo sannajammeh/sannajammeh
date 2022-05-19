@@ -13,6 +13,7 @@ export default function About() {
               objectPosition="top center"
               placeholder="blur"
               src={devCard}
+              alt="Dev card"
             />
           </figure>
           <div>

@@ -1,12 +1,9 @@
-import Layout from "components/Layout";
 import Image from "next/image";
 import React from "react";
 import privatekLogo from "public/images/privatek.png";
 import privatekCase from "public/images/privatek-case.png";
 import privatekPackaging from "public/images/privatek-case-packaging.png";
 import privatekCasesPage from "public/images/privatek-case-pages.png";
-import Button from "components/button";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { Parallax } from "react-scroll-parallax";
 import CaseLayout from "components/case/case-layout";
@@ -27,6 +24,7 @@ const Privatek = () => {
             placeholder="blur"
             priority
             objectFit="contain"
+            alt="Privatek logo"
           />
           <div className="prose prose-invert md:max-w-[75ch]">
             <h1 className="">Web development & UI/UX for Privatek UB</h1>
@@ -45,7 +43,7 @@ const Privatek = () => {
             </p>
             <div className="flex gap-16">
               <div>
-                <a href="https://privatek.no" target="_blank">
+                <a href="https://privatek.no" target="_blank" rel="noreferrer">
                   Visit website
                 </a>
               </div>
@@ -67,7 +65,12 @@ const Privatek = () => {
           </div>
         </section>
         <figure className="aspect-video relative w-full">
-          <Image src={privatekCase} layout="fill" placeholder="blur" />
+          <Image
+            src={privatekCase}
+            layout="fill"
+            placeholder="blur"
+            alt="Privatek preview"
+          />
         </figure>
         <section className="container mx-auto my-16">
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -81,14 +84,23 @@ const Privatek = () => {
               </p>
             </div>
             <div className="px-8 py-4">
-              <Image src={privatekPackaging} placeholder="blur" />
+              <Image
+                src={privatekPackaging}
+                placeholder="blur"
+                alt="Privatek packaging"
+              />
             </div>
           </div>
         </section>
         <div className="overflow-hidden w-full">
           <Parallax translateX={["-100px", "50px"]} translateY={[-25, 25]}>
             <figure className="aspect-video relative w-[calc(200px_+_100%)]">
-              <Image src={privatekCasesPage} layout="fill" placeholder="blur" />
+              <Image
+                src={privatekCasesPage}
+                layout="fill"
+                placeholder="blur"
+                alt="privatek screens"
+              />
             </figure>
           </Parallax>
         </div>
