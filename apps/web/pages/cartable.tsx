@@ -1,7 +1,4 @@
-import Layout from "components/Layout";
 import React from "react";
-import Button from "components/button";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { SiCodio, SiFigma } from "react-icons/si";
 import Image from "next/image";
@@ -15,7 +12,6 @@ import lightStudio from "public/images/create-course.png";
 import loginIphone from "public/images/login-iphone.png";
 import iphone from "public/images/iphone.png";
 import { useIsMobile } from "hooks/useMediaQuery";
-import ProjectList from "components/project-list";
 import CaseLayout from "components/case/case-layout";
 
 const Cartable = () => {
@@ -56,7 +52,7 @@ const Cartable = () => {
             </p>
             <div className="flex gap-16">
               <div>
-                <a href="https://kurshub.no" target="_blank">
+                <a href="https://kurshub.no" target="_blank" rel="noreferrer">
                   Visit website
                 </a>
               </div>
@@ -85,6 +81,7 @@ const Cartable = () => {
                 className="filter drop-shadow-md"
                 objectFit="contain"
                 src={mockup}
+                alt="Mockup of Cartable"
               />
             </figure>
           </Parallax>
@@ -101,10 +98,10 @@ const Cartable = () => {
             <Parallax speed={5} opacity={[0, 1]}>
               <p className="text-2xl">
                 Cartable needed a unique and modern platform for their own and
-                future customers' courses. The platform needed to scale, perform
-                and most importantly convert. Performance was a must. Multiple
-                architectural choices were made in order to keep costs down and
-                performance up.
+                future customers&apos; courses. The platform needed to scale,
+                perform and most importantly convert. Performance was a must.
+                Multiple architectural choices were made in order to keep costs
+                down and performance up.
               </p>
             </Parallax>
           </Section.Content>
@@ -125,6 +122,7 @@ const Cartable = () => {
                   layout="fill"
                   objectFit="contain"
                   sizes="30vw"
+                  alt="Dual iPhone mockup"
                 />
               </div>
             </Parallax>
@@ -151,6 +149,7 @@ const Cartable = () => {
                 objectFit="contain"
                 src={lightStudio}
                 placeholder="blur"
+                alt="Light studio mockup"
               />
             </div>
             <div
@@ -162,6 +161,7 @@ const Cartable = () => {
                 placeholder="blur"
                 objectFit="cover"
                 layout="fill"
+                alt="Login iPhone mockup"
               />
             </div>
             <div
@@ -174,6 +174,7 @@ const Cartable = () => {
                 objectFit="cover"
                 objectPosition="top"
                 layout="fill"
+                alt="iPhone mockup"
               />
             </div>
           </div>

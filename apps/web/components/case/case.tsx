@@ -30,7 +30,7 @@ const CaseItem = ({
   slug: string;
 }) => {
   return (
-    <Link href={`/${slug}`} passHref>
+    <Link href={`${slug}`} passHref>
       <article className="group" role="link">
         {children}
       </article>

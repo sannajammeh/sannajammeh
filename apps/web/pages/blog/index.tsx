@@ -9,6 +9,8 @@ import { NextSeo } from "next-seo";
 import { generateRSS } from "utils/rss";
 import Image from "next/image";
 import clsx from "clsx";
+import { FiArrowLeft } from "react-icons/fi";
+import IconButton from "components/icon-button";
 
 interface Props {
   posts: Frontmatter[];
@@ -20,12 +22,23 @@ const BlogArticles: NextPage<Props> = ({ posts }) => {
       <NextSeo title="Blogs | Sanna Jammeh" />
       <Layout>
         <main className="mx-auto px-4 pt-32 max-w-[65ch] xl:max-w-[75ch]">
+          <header className="mb-4 relative">
+            <Link passHref href="/">
+              <IconButton className="!absolute top-1/2 -translate-y-1/2 -translate-x-full">
+                <FiArrowLeft size="1.75rem" />
+              </IconButton>
+            </Link>
+            <h1 className="text-4xl font-bold">Articles</h1>
+          </header>
           {/* cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <section
+            id="articles"
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
             {posts.map((post) => (
               <Article frontmatter={post} key={post.slug} />
             ))}
-          </div>
+          </section>
         </main>
       </Layout>
     </>
@@ -57,9 +70,14 @@ export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
         className="group rounded-lg overflow-hidden relative"
       >
         <div className="aspect-video relative">
-          <Image src={frontmatter.mainImage} sizes="30vw" layout="fill" />
+          <Image
+            src={frontmatter.mainImage}
+            sizes="30vw"
+            layout="fill"
+            alt="Article main image"
+          />
         </div>
-        <div className="flex group-hover:bg-radix-blue3 items-center gap-4 group cursor-pointer transition-all rounded-b-lg p-2">
+        <section className="flex group-hover:bg-radix-blue3 items-center gap-4 group cursor-pointer transition-all rounded-b-lg p-2">
           <div className="flex-1">
             <h2 className="text-xl font-semibold group-hover:text-radix-blue11 transition-all">
               {frontmatter.title}
@@ -68,7 +86,7 @@ export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
               {frontmatter.description}
             </p>
           </div>
-          <span
+          <aside
             className={clsx(
               "bg-radix-slate1 top-0 right-0 px-2 py-1 text-xs rounded-bl-lg",
               {
@@ -79,8 +97,8 @@ export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
             <time dateTime={date.toISOString()}>
               {date.toLocaleDateString("no-NB")}
             </time>
-          </span>
-        </div>
+          </aside>
+        </section>
       </article>
     </Link>
   );

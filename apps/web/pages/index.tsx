@@ -21,7 +21,7 @@ import Link from "next/link";
 import emilie from "public/images/emilie.jpeg";
 import shad from "public/images/shad.jpeg";
 
-const Wave = lazy(() => import("components/Wave"));
+const Wave = lazy(() => import("components/wave"));
 const SkillSlider = lazy(() => import("components/skill-slider"));
 
 export default function Index() {
@@ -52,7 +52,7 @@ export default function Index() {
       />
       <Layout>
         <section id="hero" className="relative h-screen">
-          <Suspense fallback={null}>
+          <Suspense fallback={<></>}>
             <Wave />
           </Suspense>
           <div className="absolute top-1/2 md:left-1/2 md:-translate-x-1/2 -translate-y-1/2 w-3/4 px-4 md:px-0 md:w-auto">

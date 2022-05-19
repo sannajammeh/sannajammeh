@@ -1,20 +1,21 @@
 import fs from "fs/promises";
 import path from "path";
-import glob from "glob";
+import glob from "fast-glob";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import rehypePrism from "rehype-prism-plus";
 import type { Frontmatter } from "types/frontmatter";
 import sharp from "sharp";
+import unixify from "unixify";
 
 const ROOT_PATH = process.cwd();
 export const DATA_PATH = path.join(ROOT_PATH, "posts");
 
 // the front matter and content of all mdx files based on `docsPaths`
-export const getAllFrontmatter = (fromPath) => {
+export const getAllFrontmatter = async (fromPath) => {
   const PATH = path.join(DATA_PATH, fromPath);
-  const paths = glob.sync(`${PATH}/**/*.mdx`);
+  const paths = await glob(unixify(`${PATH}/**/*.mdx`));
 
   return Promise.all(
     paths.map(async (filePath) => {
