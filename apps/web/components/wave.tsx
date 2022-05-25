@@ -1,3 +1,4 @@
+// Modified example of https://threejs.org/examples/webgl_points_waves.html
 import React, { memo, useEffect, useRef } from "react";
 import { useParallax } from "react-scroll-parallax";
 import * as THREE from "three";
