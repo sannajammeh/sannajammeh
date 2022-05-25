@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Frontmatter } from "types/frontmatter";
 
-export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
+export const Article = ({
+  frontmatter,
+  priority,
+}: {
+  frontmatter: Frontmatter;
+  priority?: boolean;
+}) => {
   const date = new Date(frontmatter.publishedAt);
   return (
     <Link href={`/blog/${frontmatter.slug}`}>
@@ -16,6 +22,7 @@ export const Article = ({ frontmatter }: { frontmatter: Frontmatter }) => {
                 sizes="30vw"
                 layout="fill"
                 alt="Article main image"
+                priority={priority}
               />
             )}
           </div>

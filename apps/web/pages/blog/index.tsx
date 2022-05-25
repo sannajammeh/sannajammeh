@@ -34,8 +34,12 @@ const BlogArticles: NextPage<Props> = ({ posts }) => {
             id="articles"
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
-            {posts.map((post) => (
-              <Article frontmatter={post} key={post.slug} />
+            {posts.map((post, index) => (
+              <Article
+                priority={index < 3}
+                frontmatter={post}
+                key={post.slug}
+              />
             ))}
           </section>
         </main>
