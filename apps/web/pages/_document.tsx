@@ -37,6 +37,11 @@ class PageDocument extends Document {
             href="/images/favicon/safari-pinned-tab.svg"
             color="#151718"
           />
+          <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/images/favicon/favicon.svg"
+          />
           <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
           <meta name="msapplication-TileColor" content="#151718" />
           <meta
