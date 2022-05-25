@@ -74,7 +74,7 @@ const BlogEntry: NextPage<Props> = ({
       <Layout className="mb-24">
         <div className="mx-auto min-h-screen xl:px-4 w-full xl:grid xl:grid-cols-[1fr,_min(100%,_95ch),_1fr] pt-16 lg:pt-40 gap-4 xl:gap-8">
           <div className="w-full"></div>
-          <aside className="sticky top-0 col-[3]">
+          <aside className="sticky xl:static top-4 col-[3] z-50">
             <div
               className={clsx(
                 "top-16 bg-radix-slate3 p-4 rounded-md z-50 origin-top white lg:max-w-[70vw] w-[95vw] shadow-md mx-auto mb-6",
@@ -156,6 +156,7 @@ const BlogEntry: NextPage<Props> = ({
                     layout="fill"
                     objectFit="cover"
                     alt="main image"
+                    sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, (min-width: 1200px) 70vw"
                   />
                 </figure>
               </div>

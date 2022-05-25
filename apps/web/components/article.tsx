@@ -19,7 +19,7 @@ export const Article = ({
             {frontmatter.mainImage && (
               <Image
                 src={frontmatter.mainImage}
-                sizes="30vw"
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, (min-width: 1200px) 30vw"
                 layout="fill"
                 alt="Article main image"
                 priority={priority}
