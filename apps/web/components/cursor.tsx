@@ -76,7 +76,7 @@ const Cursor = () => {
 
   return (
     <>
-      <div id="cursor" className="fixed top-0 left-0 z-50" ref={cursorRef}>
+      <div id="cursor" className="fixed top-0 left-0 z-[9999]" ref={cursorRef}>
         <div className="clickity font-space-mono absolute font-bold top-4 left-1/2 -translate-x-1/2">
           CLICKITY
         </div>

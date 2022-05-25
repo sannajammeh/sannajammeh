@@ -8,6 +8,9 @@ import rehypePrism from "rehype-prism-plus";
 import type { Frontmatter } from "types/frontmatter";
 import sharp from "sharp";
 import unixify from "unixify";
+import withTOC from "@stefanprobst/rehype-extract-toc";
+import withTocExport from "@stefanprobst/rehype-extract-toc/mdx";
+import rehypeSlug from "rehype-slug";
 
 const ROOT_PATH = process.cwd();
 export const DATA_PATH = path.join(ROOT_PATH, "posts");
@@ -46,7 +49,13 @@ export const getMdxBySlug = async (basePath, slug) => {
   const { frontmatter, code } = await bundleMDX({
     source,
     mdxOptions(options) {
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism];
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypePrism,
+        rehypeSlug,
+        withTOC,
+        [withTocExport, { name: "toc" }],
+      ];
 
       return options;
     },
@@ -89,4 +98,45 @@ const bufferToDataURL = (buffer: Buffer) => {
 const stringToDate = (dateString: string) => {
   const [day, month, year] = dateString.split("/");
   return new Date([month, day, year].join("/"));
+};
+
+export const mdxCache = {
+  list: async (): Promise<Frontmatter[] | undefined> => {
+    try {
+      const cache = await fs.readFile(path.join(DATA_PATH, "posts.db"), "utf8");
+      return (JSON.parse(cache) as Frontmatter[]) ?? undefined;
+    } catch (error) {
+      return undefined;
+    }
+  },
+  set: async (data: Frontmatter[]) => {
+    return await fs.writeFile(
+      path.join(DATA_PATH, "posts.db"),
+      JSON.stringify(data)
+    );
+  },
+};
+
+export const findRelatedPosts = async (slug: string, limit = 3) => {
+  const posts = (await mdxCache.list()) ?? (await getAllFrontmatter(""));
+  const post = posts.find((post) => post.slug === slug);
+  if (!post) {
+    return [];
+  }
+
+  const relatedPosts = posts
+    .filter(
+      (p) => p.slug !== slug && p.tags?.some((t) => post.tags?.includes(t))
+    )
+    .sort((a, b) => {
+      const aTags = new Set(a.tags ?? []);
+      const bTags = new Set(b.tags ?? []);
+      const intersection: Set<any> = new Set(
+        [...aTags].filter((x) => bTags.has(x))
+      );
+      return intersection.size;
+    })
+    .slice(0, limit);
+
+  return relatedPosts;
 };

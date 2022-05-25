@@ -26,7 +26,9 @@ export default function Nav() {
     <div
       className={clsx(
         `top-0 left-0 w-full z-50`,
-        router.pathname === "/" ? "absolute" : "sticky"
+        router.pathname === "/" || router.pathname.includes("/blog")
+          ? "absolute"
+          : "sticky"
       )}
     >
       <header className="mx-auto py-4 container font-bold font-space-mono">

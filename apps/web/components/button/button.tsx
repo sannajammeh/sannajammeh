@@ -12,6 +12,7 @@ const Button = forwardRef<HTMLAnchorElement, Props>(
         className={clsx(
           classes.button,
           className,
+          "btn",
           "font-space-mono uppercase font-bold"
         )}
         {...props}

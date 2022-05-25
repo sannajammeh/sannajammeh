@@ -6,9 +6,11 @@ import "smooth-scrollbar/dist/smooth-scrollbar.css";
 export default function Layout({
   children = null,
   title,
+  className,
 }: {
   children: React.ReactNode;
   title?: string;
+  className?: string;
 }) {
   return (
     <>
@@ -18,7 +20,7 @@ export default function Layout({
         </Head>
       )}
       <Nav />
-      <main>{children}</main>
+      <main className={className}>{children}</main>
     </>
   );
 }

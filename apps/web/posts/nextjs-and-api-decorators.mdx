@@ -1,0 +1,271 @@
+---
+title: "Next.js + API Decorators - a match made in heaven"
+publishedAt: "25/05/2022"
+updatedAt: "25/05/2022"
+description: "Using Next.js + API Decorators - to quickly develop a RESTful API"
+mainImage: "/images/next-api-decorators.png"
+tags: ["next", "Next.js", "nest.js", "typescript", "decorators", "api", "rest"]
+---
+
+# Next.js + API Decorators - a match made in heaven
+
+Next.js is a wonderful framework for building web applications. It contains a lot of great features, but the one department thats missing is a more powerful way to build resful APIs.
+
+## How building a Next.js route works, and why its difficult
+
+Next.js is a file system routed framework. As such, any file in the `pages/api` directory will be served as an API route. This is a simple example of how it usually looks.
+
+```ts
+// pages/api/cats.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+
+const handler = async (req: NextApiRequest, res: NextApiRequest) => {
+    const cat = await getCat();
+    res.status(200).json({
+        cat: cat;
+    });
+};
+
+export default handler;
+```
+
+When defining GET, POST, PUT, and DELETE methods in this manner, the code becomes quite imperative and difficult to comprehend. Let's make our cat handler into a CRUD endpoint.
+
+```ts
+// pages/api/cats.ts
+import { NextApiRequest, NextApiResponse } from "next";
+
+interface Cat {
+  name: string;
+  age: number;
+}
+
+const catsHandler = async (req: NextApiRequest, res: NextApiResponse<Cat>) => {
+  switch (req.method) {
+    case "GET":
+      const cats = await getCats();
+      res.status(200).json({
+        cats,
+      });
+      break;
+    case "POST":
+      const cat = req.body.cat as Cat;
+      const cats = await createCat(cat);
+      res.status(201).json({
+        cats,
+      });
+      break;
+    case "PUT":
+      const cat = req.body.cat as Cat;
+      const cat = await updateCat(cat);
+      res.status(200).json({
+        cat,
+      });
+      break;
+    case "DELETE":
+      const cat = await deleteCat(req.body.catId as string);
+      res.status(200).json({
+        cat,
+      });
+      break;
+    default:
+      res.status(400).json({
+        error: "Method not allowed",
+      });
+  }
+};
+
+export default catsHandler;
+```
+
+This can become incredibly hard to read as the business logic becomes larger and more complex. Additionally, there is helpers to handle middlewares or validation. Coming from a Nest.js background, I've found it's class based approach to be a bit more intuitive and easier to work with.
+
+## Next API Decorators to the resque!
+
+This library is made by the folks over at [Story of AMS](https://storyofams.com/). [Next API Decorators](https://next-api-decorators.vercel.app/) provides a way to define API routes using decorators and provides a very similar api to Nest.js.
+
+### Installation and usage
+
+Install the library by running the following command:
+
+```bash
+npm i @storyofams/next-api-decorators
+```
+
+This library requires TypeScript to work and these flags to be enabled in your `tsconfig.json`.
+
+```json
+"compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+}
+```
+
+Now lets rewrite the cats handler above using API decorators
+
+```ts
+import {
+  createHandler,
+  Get,
+  Post,
+  Put,
+  Delete,
+} from "@storyofams/next-api-decorators";
+
+interface Cat {
+  name: string;
+  age: number;
+}
+
+// pages/api/cats.ts
+class CatsHandler {
+  @Get()
+  async getCats() {
+    const cats = await getCats();
+    return {
+      cats: cats,
+    };
+  }
+
+  @Post()
+  async createCat(@Body() body: Cat) {
+    const cats = await createCats();
+    return {
+      cats: cats,
+    };
+  }
+
+  @Put()
+  async updateCat(@Body() body: { id: number } & Cat) {
+    const cat = await updateCat(body);
+    return {
+      cat: cat,
+    };
+  }
+
+  @Delete()
+  async deleteCat(@Body() body: { id: number }) {
+    const cat = await deleteCat(body);
+    return {
+      cat: cat,
+    };
+  }
+}
+
+export default createHandler(Handler);
+```
+
+This is much more readable and easy to understand. The decorators are used to define the route and the body of the request. However, this library is more powerful than that.
+
+## Building a true RESTful API handler
+
+Next api decorators can make use of Next.js's `catch all` routes to handle all routes for a directory. We can rewrite our cats handler to gain paths like `/api/cats/:id` and `/api/cats/:id/:action`. For this we will add a `catch all` route to our `pages/api` directory and install two additional libraries.
+
+```bash
+npm i class-validator class-transformer
+```
+
+These libraries enables validation of the request body using class decorators and class transformers.
+
+```ts
+// pages/api/cats/[[...params]].tsx (catch all route)
+import {
+  createHandler,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  ValidationPipe,
+} from "@storyofams/next-api-decorators";
+import { IsString, IsNumber, IsOptional } from "class-validator";
+
+interface Cat {
+  id: string;
+  name: string;
+  age: number;
+}
+
+class CatDTO {
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  age: number;
+}
+
+class UpdateCatDTO {
+  @IsString()
+  @IsOptional() // Allowed to be undefined
+  name?: string;
+
+  @IsNumber()
+  @IsOptional()
+  age?: number;
+}
+
+class CatsHandler {
+  @Get()
+  async getCats() {
+    const cats = await getCats();
+    return {
+      cats: cats,
+    };
+  }
+
+  @Get("/:id")
+  async getCat(@Param("id") id: number) {
+    const cat = await getCat(id);
+    return {
+      cat: cat,
+    };
+  }
+
+  @Post()
+  async createCat(@Body(ValidationPipe) body: CatDTO) {
+    const cats = await createCats();
+    return {
+      cats: cats,
+    };
+  }
+
+  @Put("/:id")
+  async updateCat(
+    @Param("id") id: number,
+    @Body(ValidationPipe) body: UpdateCatDTO
+  ) {
+    const cat = await updateCat(body);
+    return {
+      cat: cat,
+    };
+  }
+
+  @Delete("/:id")
+  async deleteCat(@Param("id") id: number) {
+    const cat = await deleteCat(body);
+    return {
+      cat: cat,
+    };
+  }
+}
+
+export default createHandler(CatsHandler);
+```
+
+Now we have automatic validation and transformation of the request body. We have used the `ValidationPipe` to validate the request body and the `@Param()` decorator to get the id from the url.
+User can now make Get, Put and Delete requests to `/api/cats/:id` and `/api/cats/:id`. Nest.js developers, feeling familiar yet?
+
+### There's more
+
+Next api decorators also provide all these additional features:
+
+- Express.js middleware support
+- Custom parameter decorators
+- Custom response decorators
+- Custom error handling and exceptions
+- `UseMiddleware` decorator to add multiple middlewares to a route
+- A custom middleware helper to create your own middleware decorators
+- File uploads with Multer
+
+All these features can be used together to create a very powerful API.
+Read more about them in their [docs](https://next-api-decorators.vercel.app/).

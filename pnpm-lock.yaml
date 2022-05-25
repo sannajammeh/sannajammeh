@@ -49,6 +49,7 @@ importers:
   apps/web:
     specifiers:
       '@next/bundle-analyzer': ^12.1.6
+      '@stefanprobst/rehype-extract-toc': ^2.1.3
       '@tailwindcss/typography': ^0.5.2
       '@types/glob': ^7.2.0
       '@types/lodash-es': ^4.17.6
@@ -64,6 +65,8 @@ importers:
       eslint-config: workspace:*
       fast-glob: ^3.2.11
       feed: ^4.2.2
+      fuse.js: ^6.6.2
+      github-slugger: ^1.4.0
       glob: ^8.0.1
       gray-matter: ^4.0.3
       hast-util-to-string: ^2.0.0
@@ -78,6 +81,7 @@ importers:
       postcss: ^8.4.13
       radix-colors-for-tailwind: ^2.0.0
       react: ^18.1.0
+      react-animate-height: ^2.1.2
       react-dom: ^18.1.0
       react-icons: ^4.3.1
       react-scroll-parallax: ^3.1.0
@@ -87,6 +91,7 @@ importers:
       rehype-parse: ^8.0.4
       rehype-prism: link:@types/@mapbox/rehype-prism
       rehype-prism-plus: ^1.3.2
+      rehype-slug: ^5.0.1
       remark-slug: ^7.0.1
       sass: ^1.51.0
       sharp: ^0.30.1
@@ -98,11 +103,14 @@ importers:
       unist-util-visit: ^4.1.0
       unixify: ^1.0.0
     dependencies:
+      '@stefanprobst/rehype-extract-toc': 2.1.3
       '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
       clsx: 1.1.1
       esbuild: 0.14.38
       fast-glob: 3.2.11
       feed: 4.2.2
+      fuse.js: 6.6.2
+      github-slugger: 1.4.0
       glob: 8.0.1
       gray-matter: 4.0.3
       hast-util-to-string: 2.0.0
@@ -115,6 +123,7 @@ importers:
       nprogress: 0.2.0
       parse-numeric-range: 1.3.0
       react: 18.1.0
+      react-animate-height: 2.1.2_ef5jwxihqo6n7gxfmzogljlgcm
       react-dom: 18.1.0_react@18.1.0
       react-icons: 4.3.1_react@18.1.0
       react-scroll-parallax: 3.1.0_ef5jwxihqo6n7gxfmzogljlgcm
@@ -123,6 +132,7 @@ importers:
       refractor: 4.6.0
       rehype-parse: 8.0.4
       rehype-prism-plus: 1.3.2
+      rehype-slug: 5.0.1
       remark-slug: 7.0.1
       three: 0.140.2
       unified: 10.1.2
@@ -3647,6 +3657,17 @@ packages:
       '@sanity/resolver': 2.29.5
       '@sanity/util': 2.29.5
       loader-utils: 1.1.0
+    dev: false
+
+  /@stefanprobst/rehype-extract-toc/2.1.3:
+    resolution: {integrity: sha512-rUMtMuj6spxKqlBwKvoqDFI5W5I9TEtlvmSfi83VLvkE3EqTKgw1/iV2Q6N+tNO/js9Ur7YzTG96Ysfx7wNoFA==}
+    engines: {node: '>=14.17', yarn: 1.x}
+    dependencies:
+      estree-util-is-identifier-name: 2.0.0
+      estree-util-value-to-estree: 1.3.0
+      hast-util-heading-rank: 2.1.0
+      hast-util-to-string: 2.0.0
+      unist-util-visit: 4.1.0
     dev: false
 
   /@tailwindcss/typography/0.5.2_tailwindcss@3.0.24:
@@ -7754,6 +7775,11 @@ packages:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: false
 
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
+
   /gauge/2.7.4:
     resolution: {integrity: sha1-LANAXHU4w51+s3sxcCLjJfsBi/c=}
     dependencies:
@@ -8174,6 +8200,16 @@ packages:
       vfile: 5.3.2
       vfile-location: 4.0.1
       web-namespaces: 2.0.1
+    dev: false
+
+  /hast-util-has-property/2.0.0:
+    resolution: {integrity: sha512-4Qf++8o5v14us4Muv3HRj+Er6wTNGA/N9uCaZMty4JWvyFKLdhULrv4KE1b65AthsSO9TXSZnjuxS8ecIyhb0w==}
+    dev: false
+
+  /hast-util-heading-rank/2.1.0:
+    resolution: {integrity: sha512-w+Rw20Q/iWp2Bcnr6uTrYU6/ftZLbHKhvc8nM26VIWpDqDMlku2iXUVTeOlsdoih/UKQhY7PHQ+vZ0Aqq8bxtQ==}
+    dependencies:
+      '@types/hast': 2.3.4
     dev: false
 
   /hast-util-parse-selector/2.2.5:
@@ -11963,6 +11999,19 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
+  /react-animate-height/2.1.2_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-A9jfz/4CTdsIsE7WCQtO9UkOpMBcBRh8LxyHl2eoZz1ki02jpyUL5xt58gabd0CyeLQ8fRyQ+s2lyV2Ufu8Owg==}
+    engines: {node: '>= 6.0.0'}
+    peerDependencies:
+      react: '>=15.6.2'
+      react-dom: '>=15.6.2'
+    dependencies:
+      classnames: 2.3.1
+      prop-types: 15.8.1
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: false
+
   /react-base16-styling/0.6.0:
     resolution: {integrity: sha1-7yFW1mz0E5aVyKFniGy2nqZgeSw=}
     dependencies:
@@ -12510,6 +12559,18 @@ packages:
       refractor: 4.6.0
       rehype-parse: 8.0.4
       unist-util-filter: 4.0.0
+      unist-util-visit: 4.1.0
+    dev: false
+
+  /rehype-slug/5.0.1:
+    resolution: {integrity: sha512-X5v3wV/meuOX9NFcGhJvUpEjIvQl2gDvjg3z40RVprYFt7q3th4qMmYLULiu3gXvbNX1ppx+oaa6JyY1W67pTA==}
+    dependencies:
+      '@types/hast': 2.3.4
+      github-slugger: 1.4.0
+      hast-util-has-property: 2.0.0
+      hast-util-heading-rank: 2.1.0
+      hast-util-to-string: 2.0.0
+      unified: 10.1.2
       unist-util-visit: 4.1.0
     dev: false
 
