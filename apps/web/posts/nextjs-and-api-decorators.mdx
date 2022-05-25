@@ -16,7 +16,7 @@ Next.js is a wonderful framework for building web applications. It contains a lo
 Next.js is a file system routed framework. As such, any file in the `pages/api` directory will be served as an API route. This is a simple example of how it usually looks.
 
 ```ts
-// pages/api/cats.ts
+// pages/api/cat.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiRequest) => {
@@ -78,11 +78,11 @@ const catsHandler = async (req: NextApiRequest, res: NextApiResponse<Cat>) => {
 export default catsHandler;
 ```
 
-This can become incredibly hard to read as the business logic becomes larger and more complex. Additionally, there is helpers to handle middlewares or validation. Coming from a Nest.js background, I've found it's class based approach to be a bit more intuitive and easier to work with.
+This can become incredibly hard to read as the business logic becomes larger and more complex. Additionally, there are no helpers to handle middlewares or validation. Coming from a Nest.js background, I've found it's class based approach to be a bit more intuitive and easier to work with.
 
 ## Next API Decorators to the resque!
 
-This library is made by the folks over at [Story of AMS](https://storyofams.com/). [Next API Decorators](https://next-api-decorators.vercel.app/) provides a way to define API routes using decorators and provides a very similar api to Nest.js.
+This library is made by the wonderful folks over at [Story of AMS](https://storyofams.com/). [Next API Decorators](https://next-api-decorators.vercel.app/) provides a way to define API routes using decorators and provides a very similar api to Nest.js.
 
 ### Installation and usage
 
@@ -155,11 +155,11 @@ class CatsHandler {
 export default createHandler(Handler);
 ```
 
-This is much more readable and easy to understand. The decorators are used to define the route and the body of the request. However, this library is more powerful than that.
+This is much more readable and easy to understand. The decorators are used to define the route and the body of the request. However, this library is much more powerful than that.
 
 ## Building a true RESTful API handler
 
-Next api decorators can make use of Next.js's `catch all` routes to handle all routes for a directory. We can rewrite our cats handler to gain paths like `/api/cats/:id` and `/api/cats/:id/:action`. For this we will add a `catch all` route to our `pages/api` directory and install two additional libraries.
+Next api decorators can make use of Next.js's `catch all` routes to handle all requests for a directory. We can rewrite our cats handler to gain paths like `/api/cats/:id` and `/api/cats/:id/:action`. For this we will add a `catch all` route to our `pages/api` directory and install two additional libraries to handle validation.
 
 ```bash
 npm i class-validator class-transformer
@@ -252,8 +252,8 @@ class CatsHandler {
 export default createHandler(CatsHandler);
 ```
 
-Now we have automatic validation and transformation of the request body. We have used the `ValidationPipe` to validate the request body and the `@Param()` decorator to get the id from the url.
-User can now make Get, Put and Delete requests to `/api/cats/:id` and `/api/cats/:id`. Nest.js developers, feeling familiar yet?
+The body of the request is now automatically validated and transformed. To retrieve the id from the url, we utilized the `ValidationPipe` decorator and the `@Param()` decorator.
+Requests to `/api/cats/:id` and `/api/cats/:id` can now be made to `GET`, `PUT`, and `DELETE`. Nest.js developers, do you feel familiar yet?
 
 ### There's more
 
