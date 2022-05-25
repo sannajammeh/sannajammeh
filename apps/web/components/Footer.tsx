@@ -1,56 +1,99 @@
-export default function Footer() {
-  return (
-    <footer className="tc bg-center pb5 w-100 relative bg-white">
-      <div className="w-100 ph3 pv4">
-        <a
-          className="link black bg-transparent inline-flex items-center ma2 tc br2 pa2"
-          href="https://twitter.com/vercel"
-          title="Twitter"
-        >
-          <svg
-            className="dib h2 w2"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            strokeLinejoin="round"
-            strokeMiterlimit="1.414"
-          >
-            <path
-              d="M16 3.038c-.59.26-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.375-1.337.648-2.085.795-.598-.638-1.45-1.036-2.396-1.036-1.812 0-3.282 1.468-3.282 3.28 0 .258.03.51.085.75C5.152 5.39 2.733 4.084 1.114 2.1.83 2.583.67 3.147.67 3.75c0 1.14.58 2.143 1.46 2.732-.538-.017-1.045-.165-1.487-.41v.04c0 1.59 1.13 2.918 2.633 3.22-.276.074-.566.114-.865.114-.21 0-.416-.02-.617-.058.418 1.304 1.63 2.253 3.067 2.28-1.124.88-2.54 1.404-4.077 1.404-.265 0-.526-.015-.783-.045 1.453.93 3.178 1.474 5.032 1.474 6.038 0 9.34-5 9.34-9.338 0-.143-.004-.284-.01-.425.64-.463 1.198-1.04 1.638-1.7z"
-              fillRule="nonzero"
-            />
-          </svg>
-          <span className="f6 ml3 pr2">Twitter</span>
-        </a>
-        <a
-          className="link black bg-transparent inline-flex items-center ma2 tc br2 pa2"
-          href="https://github.com/vercel/vrs"
-          title="GitHub"
-        >
-          <svg
-            className="dib h2 w2"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            strokeLinejoin="round"
-            strokeMiterlimit="1.414"
-          >
-            <path d="M8 0C3.58 0 0 3.582 0 8c0 3.535 2.292 6.533 5.47 7.59.4.075.547-.172.547-.385 0-.19-.007-.693-.01-1.36-2.226.483-2.695-1.073-2.695-1.073-.364-.924-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.223 1.873.87 2.33.665.072-.517.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.953 0-.873.31-1.587.823-2.147-.083-.202-.358-1.015.077-2.117 0 0 .672-.215 2.2.82.638-.178 1.323-.266 2.003-.27.68.004 1.364.092 2.003.27 1.527-1.035 2.198-.82 2.198-.82.437 1.102.163 1.915.08 2.117.513.56.823 1.274.823 2.147 0 3.073-1.87 3.75-3.653 3.947.287.246.543.735.543 1.48 0 1.07-.01 1.933-.01 2.195 0 .215.144.463.55.385C13.71 14.53 16 11.534 16 8c0-4.418-3.582-8-8-8" />
-          </svg>
-          <span className="f6 ml3 pr2">GitHub</span>
-        </a>
-        <br />
+import React from "react";
+import {
+  FiMail,
+  FiLinkedin,
+  FiInstagram,
+  FiTwitter,
+  FiGithub,
+  FiRss,
+} from "react-icons/fi";
+import IconButton from "./icon-button";
 
-        <a
-          className="link black inline-flex items-center ma2 tc br2 pa2"
-          href="https://vercel.com"
-          aria-label="Vercel"
-        ></a>
+const Footer = () => {
+  return (
+    <footer id="contact" className="relative py-24 md:py-0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="none"
+          stroke="var(--slate4)"
+          strokeWidth="1px"
+          strokeDasharray="2, 2"
+          strokeLinejoin="round"
+          d="M0,224L0,192L68.6,192L68.6,64L137.1,64L137.1,64L205.7,64L205.7,288L274.3,288L274.3,128L342.9,128L342.9,32L411.4,32L411.4,128L480,128L480,96L548.6,96L548.6,128L617.1,128L617.1,320L685.7,320L685.7,288L754.3,288L754.3,32L822.9,32L822.9,192L891.4,192L891.4,224L960,224L960,288L1028.6,288L1028.6,160L1097.1,160L1097.1,32L1165.7,32L1165.7,224L1234.3,224L1234.3,0L1302.9,0L1302.9,160L1371.4,160L1371.4,64L1440,64L1440,320L1371.4,320L1371.4,320L1302.9,320L1302.9,320L1234.3,320L1234.3,320L1165.7,320L1165.7,320L1097.1,320L1097.1,320L1028.6,320L1028.6,320L960,320L960,320L891.4,320L891.4,320L822.9,320L822.9,320L754.3,320L754.3,320L685.7,320L685.7,320L617.1,320L617.1,320L548.6,320L548.6,320L480,320L480,320L411.4,320L411.4,320L342.9,320L342.9,320L274.3,320L274.3,320L205.7,320L205.7,320L137.1,320L137.1,320L68.6,320L68.6,320L0,320L0,320Z"
+        ></path>
+      </svg>
+      <div className="container mx-auto absolute top-1/2 md:top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <h1>
+          <span className="text-1xl font-bold uppercase text-radix-slate11">
+            Hire me for a project
+          </span>
+        </h1>
+        <div className="md:flex justify-between">
+          <div>
+            <h2 className="text-6xl font-bold uppercase italic">Say hello</h2>
+            <span
+              className="text-sm text-radix-slate10 font-space-mono"
+              aria-hidden
+            >
+              &copy; {new Date().getFullYear()} Sanna Jammeh
+            </span>
+          </div>
+          <div className="mt-8 md:mt-0 justify-center md:justify-start flex gap-4 text-radix-slate11">
+            <IconButton
+              href="mailto:hello@sannajammeh.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                <FiMail size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+            <IconButton
+              href="https://www.linkedin.com/in/sanna-jammeh-39b50016b/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                <FiLinkedin size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+            <IconButton
+              href="https://www.instagram.com/sanjammeh/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                <FiInstagram size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+            <IconButton
+              href="https://twitter.com/SannaJammeh5"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                <FiTwitter size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+            <IconButton
+              href="https://github.com/sannajammeh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                <FiGithub size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+            <IconButton href="/rss/feed.xml" target="_blank">
+              <span>
+                <FiRss size="2rem" className="inline-block" />
+              </span>
+            </IconButton>
+          </div>
+        </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

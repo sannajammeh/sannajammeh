@@ -2,6 +2,8 @@ import Head from "next/head";
 import Nav from "./Nav";
 
 import "smooth-scrollbar/dist/smooth-scrollbar.css";
+import Footer from "./Footer";
+import clsx from "clsx";
 
 export default function Layout({
   children = null,
@@ -20,7 +22,8 @@ export default function Layout({
         </Head>
       )}
       <Nav />
-      <main className={className}>{children}</main>
+      <main className={clsx(className, "min-h-screen")}>{children}</main>
+      <Footer />
     </>
   );
 }
