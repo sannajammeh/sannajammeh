@@ -38,7 +38,7 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} Sanna Jammeh
             </span>
           </div>
-          <div className="mt-8 md:mt-0 justify-center md:justify-start flex gap-4 text-radix-slate11">
+          <div className="mt-8 md:mt-0 justify-center md:justify-start flex flex-wrap md:flex-nowrap gap-4 text-radix-slate11">
             <IconButton
               href="mailto:hello@sannajammeh.com"
               target="_blank"
