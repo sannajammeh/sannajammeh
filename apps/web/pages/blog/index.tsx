@@ -53,7 +53,7 @@ export default BlogArticles;
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getAllFrontmatter("");
 
-  const sortedPosts = sortBy(posts, "created").reverse();
+  const sortedPosts = sortBy(posts, "publishedAt").reverse();
 
   await generateRSS(posts);
 
