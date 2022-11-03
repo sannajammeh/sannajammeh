@@ -11,25 +11,37 @@ const CardRoot = ({ className, children, ...props }: Props) => {
   );
 };
 
-const CardBorder = ({ className }: { className?: string }) => (
-  <svg
-    className={clsx(
-      "absolute top-0 left-0 rounded-md pointer-events-none",
-      className
-    )}
-    width="100%"
-    height="100%"
-  >
-    <rect
+const CardBorder = ({
+  className,
+  ...rest
+}: { className?: string } & React.SVGProps<SVGSVGElement>) => (
+  <>
+    <svg
+      className={clsx(
+        "card-border absolute top-0 left-0 rounded-md pointer-events-none",
+        className
+      )}
       width="100%"
       height="100%"
-      fill="none"
-      stroke="var(--slate8)"
-      strokeWidth="1px"
-      strokeDasharray="4, 4"
-      strokeLinejoin="round"
-    />
-  </svg>
+      {...rest}
+    >
+      <rect
+        width="100%"
+        height="100%"
+        fill="none"
+        strokeWidth="1px"
+        strokeDasharray="4, 4"
+        strokeLinejoin="round"
+      />
+    </svg>
+    <style jsx>
+      {`
+        .card-border rect {
+          stroke: var(--border-color, var(--slate8));
+        }
+      `}
+    </style>
+  </>
 );
 
 const CardContent = ({ className, children }: Props) => {

@@ -14,11 +14,7 @@ const config = {
     ],
     formats: ["image/avif", "image/webp"],
   },
-  experimental: {
-    images: {
-      layoutRaw: true,
-    },
-  },
+  experimental: {},
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

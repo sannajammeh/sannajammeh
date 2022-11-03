@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { lazy, Suspense } from "react";
 import Layout from "../components/Layout";
 import { CgArrowDown } from "react-icons/cg";
@@ -7,11 +8,13 @@ import { Parallax, useParallax } from "react-scroll-parallax";
 import { SiFigma, SiNestjs, SiReact } from "react-icons/si";
 import { NextSeo } from "next-seo";
 import Button from "components/button";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 
 import emilie from "public/images/emilie.jpeg";
 import shad from "public/images/shad.jpeg";
+import { Trophy } from "../components/Trophy";
+import ProjectCard from "components/ProjectCard";
 
 const Wave = lazy(() => import("components/wave"));
 const SkillSlider = lazy(() => import("components/skill-slider"));
@@ -202,7 +205,6 @@ export default function Index() {
                       width={60}
                       height={60}
                       className="object-cover rounded-full"
-                      layout="raw"
                       alt="Emilie avatar"
                     />
                   </div>
@@ -254,7 +256,6 @@ export default function Index() {
                         width={60}
                         height={60}
                         className="object-cover rounded-full"
-                        layout="raw"
                         alt="Emilie avatar"
                       />
                     </div>
@@ -295,27 +296,42 @@ export default function Index() {
             </div>
           </Section.Content>
         </Section.Root>
+
+        <Section.Root className="mb-16">
+          <Section.Content fullWidth>
+            <h1>
+              <span className="text-3xl font-bold uppercase mb-8 italic">
+                Projects & open source
+              </span>
+            </h1>
+
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ProjectCard
+                title="tRPC-SWR"
+                description="Created and implemented RFC to add support for tRPC v10 Proxy API"
+                href="https://github.com/sachinraja/trpc-swr/issues/19"
+                role="Contributor"
+                image="https://github.com/sachinraja/trpc-swr/raw/main/assets/banner.png"
+                target="_blank"
+              />
+              <ProjectCard
+                title="tw-classed"
+                description="React library for creating reusable Tailwind components"
+                href="https://tw-classed.vercel.app"
+                role="Creator"
+                target="_blank"
+              />
+              <ProjectCard
+                title="Next.js"
+                description="Enabled support for ES decorators"
+                href="https://github.com/vercel/next.js/pull/32914"
+                role="Contributor"
+                target="_blank"
+              />
+            </div>
+          </Section.Content>
+        </Section.Root>
       </Layout>
     </>
   );
 }
-
-const Trophy = () => {
-  return (
-    <svg
-      className="text-4xl"
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13 15.9C15.2822 15.4367 17 13.419 17 11V4H7V11C7 13.419 8.71776 15.4367 11 15.9V18H9V20H15V18H13V15.9ZM9 6H15V11C15 12.6569 13.6569 14 12 14C10.3431 14 9 12.6569 9 11V6Z"
-        fill="var(--slate9)"
-      />
-      <path d="M18 6H20V11H18V6Z" fill="var(--slate9)" />
-      <path d="M6 6H4V11H6V6Z" fill="var(--slate9)" />
-    </svg>
-  );
-};
