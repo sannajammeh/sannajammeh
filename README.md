@@ -1,6 +1,6 @@
 # Sanna Jammeh | Fullstack Developer
 
-Hello 👋, welcome to my page
+Freelance developer and library maintainer
 
 ### Support my work
 
