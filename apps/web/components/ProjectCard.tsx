@@ -4,6 +4,7 @@ import * as Card from "components/card";
 import Link from "next/link";
 import classes from "./ProjectCard.module.scss";
 import { FiExternalLink } from "react-icons/fi";
+import Image from "next/future/image";
 
 type Props = {
   title: string;
@@ -12,6 +13,7 @@ type Props = {
   href?: string;
   target?: React.HTMLProps<HTMLAnchorElement>["target"];
   role?: string;
+  nextImage?: boolean;
 };
 
 const ProjectCard = ({
@@ -21,6 +23,7 @@ const ProjectCard = ({
   href: url,
   target,
   role,
+  nextImage = false,
 }: Props) => {
   const withLink = (children: React.ReactNode) => {
     if (url)
@@ -44,14 +47,24 @@ const ProjectCard = ({
         <Card.Content>
           <div className="flex gap-4">
             <figure>
-              <img
-                src={image ? image : `/api/og.png?title=${title}`}
-                loading="lazy"
-                width={130}
-                height={130 / 1.77}
-                className="object-cover aspect-video w-[130px] h-[calc(130px_/_1.77)] max-w-none"
-                alt="Project thumbnail"
-              />
+              {nextImage && image ? (
+                <Image
+                  width={130}
+                  height={130 / 1.77}
+                  className="object-cover aspect-video w-[130px] h-[calc(130px_/_1.77)] max-w-none"
+                  src={image}
+                  alt={title}
+                />
+              ) : (
+                <img
+                  src={image ? image : `/api/og.png?title=${title}`}
+                  loading="lazy"
+                  width={130}
+                  height={130 / 1.77}
+                  className="object-cover aspect-video w-[130px] h-[calc(130px_/_1.77)] max-w-none"
+                  alt="Project thumbnail"
+                />
+              )}
             </figure>
             <div>
               <h2 className="text-lg">

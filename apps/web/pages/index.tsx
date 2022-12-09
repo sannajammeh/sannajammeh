@@ -318,6 +318,7 @@ export default function Index() {
                 title="tw-classed"
                 description="React library for creating reusable Tailwind components"
                 href="https://tw-classed.vercel.app"
+                image="https://tw-classed.vercel.app/api/og.png"
                 role="Creator"
                 target="_blank"
               />

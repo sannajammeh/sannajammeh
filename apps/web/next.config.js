@@ -11,6 +11,7 @@ const config = {
       "avatars.githubusercontent.com",
       "images.unsplash.com",
       "api.daily.dev",
+      "tw-classed.vercel.app",
     ],
     formats: ["image/avif", "image/webp"],
   },
