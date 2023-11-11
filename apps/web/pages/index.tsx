@@ -56,7 +56,7 @@ export default function Index() {
                 SANNA <span className="text-bordered-light">JAMMEH</span>
               </h1>
               <h2 className="text-2xl font-medium lg:text-right">
-                I make cool sh#t that performs.
+                I make cool stuff that performs.
               </h2>
               <div className="flex gap-4 mt-4 md:-mt-8">
                 <Button href="/resume.pdf" target="_blank" className="!text-lg">
