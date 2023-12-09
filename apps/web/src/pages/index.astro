@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+import RootLayout from "../layouts/RootLayout.astro";
+
+import meJpg from "../assets/me.jpg";
+import WorkSection from "../sections/home/Work.astro";
+import ProjectsSection from "../sections/home/ProjectsSection.astro";
+import { classed } from "@tw-classed/core";
+import {
+  GithubIcon,
+  InstagramIcon,
+  TwitterIcon,
+  WholeWordIcon,
+  XIcon,
+} from "lucide-solid";
+
+const socialLink = classed(
+  "text-gray-600 hover:text-gray-800 inline-flex items-center gap-2px hover:underline underline-offset-2"
+);
+---
+
+<RootLayout title="Sanna Jammeh | Indie dev">
+  <section id="hero">
+    <div class="mt-12 flex items-center justify-start gap-4 container mx-auto">
+      <Image
+        class="w-120px h-120px rounded-3xl border-3 border-black shadow-xl"
+        src={meJpg}
+        alt="Sanna Jammeh's image"
+      />
+      <div>
+        <h1 class="text-4xl font-semibold">Hello, I'm Sanna</h1>
+        <p class="mt-2 text-gray-500 text-lg max-w-[60ch] text-balance">
+          Crafting UIs since 2017, strengths on both ends of the stack with a
+          passion for frontend and design.
+        </p>
+        <div class="flex gap-4 flex-wrap">
+          <a class={socialLink()} href="/resume"
+            ><WholeWordIcon size="1.6em" /> Resume</a
+          >
+          <a
+            class={socialLink()}
+            href="https://github.com/sannajammeh"
+            target="_blank"
+          >
+            <GithubIcon size="1.2em" /> @sannajammeh
+          </a>
+          <!-- <a class={socialLink()} href="https://x.com/sannajammeh5"
+            ><XIcon /> @sannajammeh5</a
+          > -->
+          <a class={socialLink()} href="https://instagram.com/sanjammeh"
+            ><InstagramIcon size="1.2em" /> @sanjammeh</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+  <ProjectsSection />
+  <WorkSection />
+  <section id="contact" class="mt-30vmin mb-20vmin">
+    <h4 class="text-6xl font-black text-center">Lets get in touch!</h4>
+    <p class="mt-2 text-2xl text-gray-500 max-w-prose mx-auto text-center">
+      I'm always open to new opportunities, feel free to reach out in Norwegian
+      too.
+    </p>
+    <div class="mt-8 flex justify-center text-5xl font-semibold">
+      <a
+        class="hover:underline underline-offset-2"
+        href="mailto:hello@sannajammeh.com"
+      >
+        hello@sannajammeh.com</a
+      >
+    </div>
+  </section>
+</RootLayout>

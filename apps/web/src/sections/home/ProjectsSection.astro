@@ -1,0 +1,43 @@
+---
+import ProjectDisplay from "./ProjectDisplay.astro";
+import { MousePointerClick } from "lucide-solid";
+
+import { getDataEntryById } from "astro:content";
+
+const entries = [
+  await getDataEntryById("projects", "noralytics"),
+  await getDataEntryById("projects", "chew"),
+];
+
+const colors = ["bg-blue", "bg-orange"];
+---
+
+<section class="container mx-auto mt-20vmin">
+  <h2 class="text-3xl font-semibold">Highlighted projects</h2>
+  <div class="grid grid-cols-2 mt-10 gap-8">
+    {
+      entries.map((entry, index) => (
+        <ProjectDisplay
+          title={entry.data.name}
+          description={entry.data.description}
+          image={entry.data.image}
+          slug={entry.id}
+          type="case-study"
+          colorClass={colors[index]}
+        />
+      ))
+    }
+  </div>
+
+  <div class="mt-4vmin mx-auto">
+    <a
+      href="/projects"
+      class="text-2xl font-semibold text-center flex items-center group gap-1 justify-center hover:underline underline-offset-4 w-max mx-auto"
+    >
+      <MousePointerClick
+        class="group-hover:scale-105 group-active:scale-80 transition"
+        size="1em"
+      />See them all!</a
+    >
+  </div>
+</section>

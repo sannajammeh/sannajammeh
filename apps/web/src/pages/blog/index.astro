@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import RootLayout from "../../layouts/RootLayout.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("posts");
+
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+const [firstPost, ...rest] = posts;
+---
+
+<RootLayout title="Blog - Sanna Jammeh">
+  <section class="mt-16">
+    <a href={`/blog/${firstPost.slug}`}>
+      <article
+        class="rounded-2xl overflow-hidden w-full max-w-prose mx-auto border border-black border-2 hover:shadow-[0.4vmin_0.4vmin_#000] hover:scale-[1.01] transition-all duration-200 ease-in-out"
+      >
+        {
+          firstPost.data.image && (
+            <Image src={firstPost.data.image} alt={firstPost.data.title} />
+          )
+        }
+        <div class="p-3 flex flex-col gap-4 pb-8">
+          <p>
+            <time datetime={firstPost.data.date.toDateString()}
+              >{dateFormat.format(firstPost.data.date)}</time
+            >
+          </p>
+          <h2 class="text-2xl font-semibold">{firstPost.data.title}</h2>
+          <p class="text-lg text-gray-6">{firstPost.data.description}</p>
+          <div class="flex gap-1 flex-wrap justify-end">
+            {
+              firstPost.data.tags?.map((tag) => (
+                <button class="text-gray-6" role="checkbox" data-tag={tag}>
+                  #{tag}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </article>
+    </a>
+  </section>
+  <section class="mt-24 container mx-auto">
+    <h2 class="mb-4 text-3xl font-semibold">More Posts</h2>
+    <div class="grid grid-cols-3">
+      {
+        rest.map((post) => (
+          <article class="rounded-2xl overflow-hidden max-w-prose border-black border-2 hover:shadow-[0.4vmin_0.4vmin_#000] hover:scale-[1.01] transition-all duration-200 ease-in-out">
+            {post.data.image && (
+              <Image src={post.data.image} alt={post.data.title} />
+            )}
+            <div class="flex flex-col gap-3 p-3">
+              <p>
+                <time datetime={post.data.date.toDateString()}>
+                  {dateFormat.format(post.data.date)}
+                </time>
+              </p>
+              <h2 class="text-2xl font-semibold">{post.data.title}</h2>
+              <p class="text-lg text-gray-6">{post.data.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</RootLayout>
