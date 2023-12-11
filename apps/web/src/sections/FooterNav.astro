@@ -12,14 +12,16 @@ const navItem = classed(
   class={cn(
     "fixed z-10 left-50% -translate-x-50% w-max bg-white rounded-2xl border-black border uppercase p3",
     import.meta.env.PROD ? "bottom-6" : "bottom-8",
-    "flex gap-4 justify-center items-center shadow-brutalism-2 filter-drop-shadow-lg"
+    "shadow-brutalism-2 filter-drop-shadow-lg"
   )}
 >
-  <a class={navItem()} data-matcher="/" href="/">Home</a>
-  <a class={navItem()} data-matcher="/blog/:path*" href="/blog">Blog</a>
-  <a class={navItem()} data-matcher="/projects/:path*" href="/projects"
-    >Projects</a
-  >
+  <div class="flex gap-4 justify-center items-center">
+    <a class={navItem()} data-matcher="/" href="/">Home</a>
+    <a class={navItem()} data-matcher="/blog/:path*" href="/blog">Blog</a>
+    <a class={navItem()} data-matcher="/projects/:path*" href="/projects"
+      >Projects</a
+    >
+  </div>
   <nav-indicator></nav-indicator>
 </nav>
 
@@ -64,7 +66,7 @@ const navItem = classed(
     constructor() {
       super();
 
-      this.style.display = "contents";
+      // this.style.display = "";
       const content = document
         .querySelector<HTMLTemplateElement>("#nav-indicator-template")!
         .content.cloneNode(true);
@@ -141,7 +143,14 @@ const navItem = classed(
     moveToActive();
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  function loaded() {
+    if (document.readyState !== "loading") {
+      init();
+    } else {
+      document.addEventListener("DOMContentLoaded", init);
+    }
+  }
+  loaded();
 </script>
 
 <style>
