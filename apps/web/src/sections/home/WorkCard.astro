@@ -36,11 +36,11 @@ const end = endDate ? new Date(endDate) : null;
 <DashedBorder
   as="article"
   radius="0.8rem"
-  class:list={["p-2 px-4 flex gap-4 group"]}
+  class:list={["p-2 px-4 flex gap-4 group max-md:w-full"]}
   {...rest}
 >
   <div>
-    <h3 class="text-lg mt-0 font-semibold leading-normal whitespace-nowrap">
+    <h3 class="text-lg mt-0 font-semibold leading-normal md:whitespace-nowrap">
       {company}
       {location && `(${location})`}
     </h3>

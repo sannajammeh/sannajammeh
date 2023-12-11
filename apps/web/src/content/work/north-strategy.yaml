@@ -2,8 +2,8 @@ company: North Strategy
 location: Oslo, Norway
 role: Co-Founder & Lead Fullstack Developer
 startDate: 2021-08-01
-projects:
-  - name: ZiO Pizza
-    slug: zio
-  - name: Noran Energy
-    slug: noran-energy
+# projects:
+#   - name: ZiO Pizza
+#     slug: zio
+#   - name: Noran Energy
+#     slug: noran-energy

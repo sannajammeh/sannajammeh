@@ -2,6 +2,6 @@ company: Chew AS
 location: Oslo, Norway
 role: Lead Fullstack Developer
 startDate: 2022-08-01
-projects:
-  - name: Chew Academy
-    slug: chew
+# projects:
+#   - name: Chew Academy
+#     slug: chew

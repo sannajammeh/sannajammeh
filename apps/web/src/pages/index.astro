@@ -15,7 +15,9 @@ const socialLink = classed(
 
 <RootLayout title="Sanna Jammeh | Fullstack developer">
   <section id="hero">
-    <div class="mt-12 flex items-center justify-start gap-4 container mx-auto">
+    <div
+      class="mt-12 flex md:items-center justify-start gap-4 container mx-auto"
+    >
       <Image
         class="w-120px h-120px rounded-3xl border-3 border-black shadow-xl"
         src={meJpg}
@@ -53,12 +55,14 @@ const socialLink = classed(
   <ProjectsSection />
   <WorkSection />
   <section id="contact" class="mt-30vmin mb-20vmin">
-    <h4 class="text-6xl font-black text-center">Lets get in touch!</h4>
+    <h4 class="text-4xl md:text-6xl font-black text-center">
+      Lets get in touch!
+    </h4>
     <p class="mt-2 text-2xl text-gray-500 max-w-prose mx-auto text-center">
       I'm always open to new opportunities, feel free to reach out in Norwegian
       too.
     </p>
-    <div class="mt-8 flex justify-center text-5xl font-semibold">
+    <div class="mt-8 flex justify-center text-3xl md:text-5xl font-semibold">
       <a
         class="hover:underline underline-offset-2"
         href="mailto:hello@sannajammeh.com"

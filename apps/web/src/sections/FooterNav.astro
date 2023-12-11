@@ -20,7 +20,6 @@ const navItem = classed(
   <a class={navItem()} data-matcher="/projects/:path*" href="/projects"
     >Projects</a
   >
-  <button class={navItem()}>MORE</button>
   <nav-indicator></nav-indicator>
 </nav>
 
@@ -114,21 +113,25 @@ const navItem = classed(
     indicator.move(item, navItems);
   }
 
-  navItems.forEach((item) => {
-    item.addEventListener("mouseover", () => {
-      indicator.move(item, navItems);
+  function init() {
+    navItems.forEach((item) => {
+      item.addEventListener("mouseover", () => {
+        indicator.move(item, navItems);
+      });
+
+      item.addEventListener("focus", () => {
+        indicator.move(item, navItems);
+      });
     });
 
-    item.addEventListener("focus", () => {
-      indicator.move(item, navItems);
+    container.addEventListener("mouseleave", () => {
+      moveToActive();
     });
-  });
 
-  container.addEventListener("mouseleave", () => {
     moveToActive();
-  });
+  }
 
-  moveToActive();
+  document.addEventListener("DOMContentLoaded", init);
 </script>
 
 <style>
