@@ -1,0 +1,15 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<header class="h-24 flex items-center justify-between container mx-auto">
+  <a class="font-semibold text-2xl block hover:scale-110 transition" href={"/"}
+    >Sanna Jammeh.</a
+  >
+  <a
+    class="block bg-black rounded-2xl text-white py-3 px-4 font-semibold text-lg hover:shadow-[0.4vmin_0.4vmin_#aaa] transition"
+    href={pathname === "/" ? "#contact" : "/#contact"}
+  >
+    Contact me</a
+  >
+</header>

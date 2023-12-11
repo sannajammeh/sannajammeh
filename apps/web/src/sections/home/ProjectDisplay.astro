@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import { BookmarkIcon, LinkIcon } from "lucide-solid";
+
+interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  slug: string;
+  href?: string;
+  type?: "case-study" | "link";
+  colorClass?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  slug,
+  href,
+  colorClass = "bg-blue",
+  type,
+} = Astro.props;
+---
+
+<a
+  class="relative focus:scale-105 hover:scale-101 transition-transform"
+  href={href ? href : `/projects/${slug}`}
+  target={href ? "_blank" : "_self"}
+>
+  <article
+    class="rounded-2xl border-2.5 border-black bg-black pl-2 sm:pl-3 overflow-hidden hover:shadow-[0.6vmin_0.4vmin_#000] transition"
+  >
+    <div class:list={["w-full h-full flex flex-col rounded-tl-xl", colorClass]}>
+      <Image
+        class="w-full aspect-video object-cover object-top rounded-tl-2xl max-sm:mt-4 max-sm:ml-4 mt-6 ml-6"
+        sizes="50vw"
+        src={image}
+        alt={`${title} project's image`}
+      />
+      <div class="bg-black">
+        <div
+          class="border-t flex-grow h-160px border-inset border-black border-t-dashed border-spacing-2 bg-white p-4 rounded-bl-xl"
+        >
+          <h3 class="text-2xl max-sm:text-xl font-semibold">
+            {title}
+          </h3>
+          <p
+            class="mt-2 text-gray-500 max-w-prose text-balance max-sm:line-clamp-3"
+          >
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+  {
+    type === "case-study" && (
+      <div class="absolute bg-indigo-500 border-black border-2 -bottom-4 right-15% px-3 py-1.5 rounded-lg text-white flex items-center gap-px shadow-brutalism-2 font-semibold">
+        <BookmarkIcon /> Case study!
+      </div>
+    )
+  }
+
+  {
+    type === "link" && (
+      <div class="absolute bg-yellow-500 border-black border-2 -bottom-4 right-15% px-3 py-1.5 rounded-lg text-white flex items-center gap-2px shadow-brutalism-2 font-semibold">
+        <LinkIcon size="1.25em" /> Link
+      </div>
+    )
+  }
+</a>

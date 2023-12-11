@@ -1,0 +1,58 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+import ProjectDisplay from "../../sections/home/ProjectDisplay.astro";
+
+import { getCollection } from "astro:content";
+
+const entries = await getCollection("projects");
+
+const sorted = entries.toSorted((a, b) => {
+  const aDate = new Date(a.data.startDate);
+  const bDate = new Date(b.data.startDate);
+
+  return bDate.getTime() - aDate.getTime();
+});
+
+const colors = [
+  "bg-blue",
+  "bg-green",
+  "bg-yellow",
+  "bg-pink",
+  "bg-purple",
+  "bg-orange",
+];
+---
+
+<RootLayout title="Projects - Sanna Jammeh">
+  <main class="max-w-prose mx-auto">
+    <h2 class="font-semibold text-2xl mt-8 mb-12 text-balance">
+      Projects and sites I've produced
+    </h2>
+    <div class="flex flex-col gap-40vmin">
+      {
+        sorted.map((entry, index) => (
+          <div>
+            <time
+              class="text-lg mb-1 block text-gray-700"
+              datetime={entry.data.startDate.toISOString()}
+            >
+              {entry.data.startDate.toLocaleDateString("en-US", {
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
+            <ProjectDisplay
+              title={entry.data.name}
+              description={entry.data.description}
+              image={entry.data.image}
+              slug={entry.id}
+              type={entry.data.type}
+              href={entry.data.href}
+              colorClass={colors[index % colors.length]}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </main>
+</RootLayout>

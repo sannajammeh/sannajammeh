@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import DashedBorder from "../../components/DashedBorder.astro";
+
+interface Props {
+  company: string;
+  location?: string;
+  role: string;
+  startDate: string | Date;
+  endDate?: string | Date;
+  projects?: Array<string | { slug: string; name: string }>;
+  image?: ImageMetadata;
+  class?: string;
+}
+
+const {
+  company,
+  location,
+  projects,
+  role,
+  startDate,
+  endDate,
+  image,
+  ...rest
+} = Astro.props;
+
+const MonthYearFormat = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  year: "numeric",
+});
+
+const start = new Date(startDate);
+const end = endDate ? new Date(endDate) : null;
+---
+
+<DashedBorder
+  as="article"
+  radius="0.8rem"
+  class:list={["p-2 px-4 flex gap-4 group max-md:w-full"]}
+  {...rest}
+>
+  <div>
+    <h3 class="text-lg mt-0 font-semibold leading-normal md:whitespace-nowrap">
+      {company}
+      {location && `(${location})`}
+    </h3>
+    <p class="text-gray-800 font-medium">{role}</p>
+    <div
+      class="flex items-start uppercase font-medium text-sm gap-2 text-gray-500"
+    >
+      <time datetime={start.toISOString()}>{MonthYearFormat.format(start)}</time
+      >
+      <span>-</span>
+      <time datetime={end ? end.toString() : "now"}>
+        {end ? MonthYearFormat.format(end) : "Present"}
+      </time>
+    </div>
+  </div>
+  {
+    image && (
+      <Image
+        src={image}
+        class="w-70px h-70px rounded-xl order-first object-cover"
+        alt="project-avatar"
+      />
+    )
+  }
+  {
+    projects && (
+      <div class="ml-auto text-right">
+        <dl class="text-sm">
+          <dt class="uppercase font-medium">Projects</dt>
+          {projects.map((project) => (
+            <dd>
+              {typeof project === "string" ? (
+                <a
+                  class="hover:underline text-gray-500 hover:text-gray-800"
+                  href={`/projects/${project}`}
+                >
+                  #{project}
+                </a>
+              ) : (
+                <a
+                  class="hover:underline text-gray-500 hover:text-gray-800"
+                  href={`/projects/${project.slug}`}
+                >
+                  #{project.name.replaceAll(" ", "")}
+                </a>
+              )}
+            </dd>
+          ))}
+        </dl>
+      </div>
+    )
+  }
+</DashedBorder>

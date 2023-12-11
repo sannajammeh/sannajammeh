@@ -1,0 +1,146 @@
+---
+import { classed } from "@tw-classed/core";
+import { cn } from "../utils/cn";
+
+const navItem = classed(
+  "nav-item flex gap-1 items-center transition duration-250"
+);
+---
+
+<nav
+  id="nav-container"
+  class={cn(
+    "fixed z-10 left-50% -translate-x-50% w-max bg-white rounded-2xl border-black border uppercase p3",
+    import.meta.env.PROD ? "bottom-6" : "bottom-8",
+    "flex gap-4 justify-center items-center shadow-brutalism-2 filter-drop-shadow-lg"
+  )}
+>
+  <a class={navItem()} data-matcher="/" href="/">Home</a>
+  <a class={navItem()} data-matcher="/blog/:path*" href="/blog">Blog</a>
+  <a class={navItem()} data-matcher="/projects/:path*" href="/projects"
+    >Projects</a
+  >
+  <nav-indicator></nav-indicator>
+</nav>
+
+<script>
+  import { composePatterns } from "../utils/url";
+  // @ts-ignore: Property 'UrlPattern' does not exist
+  if (!globalThis.URLPattern) {
+    await import("urlpattern-polyfill");
+  }
+  const pathname = window.location.pathname;
+  const container = document.querySelector<HTMLDivElement>("#nav-container")!;
+
+  const navItemMap = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("a.nav-item")
+  ).reduce(
+    (acc, item) => {
+      acc.set(item.dataset.matcher!, {
+        item,
+        pattern: new URLPattern({ pathname: item.dataset.matcher }),
+      });
+      return acc;
+    },
+    new Map() as Map<string, { item: HTMLAnchorElement; pattern: URLPattern }>
+  );
+
+  const matcher = composePatterns(
+    ...Array.from(navItemMap.values()).map(({ pattern }) => pattern)
+  );
+
+  const navItems = Array.from(navItemMap.values()).map(({ item }) => item);
+
+  class NavIndicator extends HTMLElement {
+    static template = `<span class="left-0 absolute top-50% -translate-y-50% bg-black rounded-xl -z-1"></span>`;
+    content: HTMLSpanElement;
+    firstPass = true;
+    constructor() {
+      super();
+
+      this.style.display = "contents";
+      this.innerHTML = NavIndicator.template;
+      this.content = this.querySelector("span")!;
+    }
+
+    move = (item: HTMLElement, off: HTMLElement[]) => {
+      item.dataset.indicated = "true";
+
+      off.forEach((other) => {
+        if (other === item) return;
+        other.dataset.indicated = "false";
+      });
+
+      this.content.style.width = `${item.offsetWidth + 14}px`;
+      this.content.style.height = `${item.offsetHeight + 14}px`;
+      this.content.style.transform = `translateX(${
+        item.offsetLeft - 7
+      }px) translateY(-50%)`;
+
+      if (this.firstPass) {
+        this.content.style.transition = "none";
+        this.content.style.opacity = "0";
+        setTimeout(() => {
+          this.content.style.transition = "all 250ms ease";
+          this.content.style.opacity = "1";
+        }, 0);
+      } else {
+        this.content.style.transition = "all 250ms ease";
+      }
+      this.firstPass = false;
+    };
+  }
+
+  customElements.define("nav-indicator", NavIndicator);
+  const indicator = document.querySelector<NavIndicator>("nav-indicator")!;
+
+  function moveToActive() {
+    const matched = matcher.match({
+      pathname,
+    });
+
+    if (!matched) return;
+
+    const { item } = navItemMap.get(matched.pathname)!;
+
+    item!.setAttribute("aria-current", "page");
+
+    navItemMap.forEach(({ item: otherItem }) => {
+      if (otherItem === item) return;
+      otherItem!.removeAttribute("aria-current");
+    });
+
+    indicator.move(item, navItems);
+  }
+
+  function init() {
+    navItems.forEach((item) => {
+      item.addEventListener("mouseover", () => {
+        indicator.move(item, navItems);
+      });
+
+      item.addEventListener("focus", () => {
+        indicator.move(item, navItems);
+      });
+    });
+
+    container.addEventListener("mouseleave", () => {
+      moveToActive();
+    });
+
+    moveToActive();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
+
+<style>
+  .nav-item[data-indicated="true"] {
+    color: white;
+  }
+
+  body {
+    padding-bottom: 10rem;
+    background-color: #f8f8f8;
+  }
+</style>

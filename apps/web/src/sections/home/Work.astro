@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import WorkCard from "./WorkCard.astro";
+
+const work = await getCollection("work");
+
+const workSorted = work.toSorted((a, b) => {
+  const aDate = new Date(a.data.startDate);
+  const bDate = new Date(b.data.startDate);
+
+  if (aDate > bDate) return -1;
+  if (aDate < bDate) return 1;
+  return 0;
+});
+---
+
+<section class="container mx-auto mt-20vmin">
+  <h2 class="text-3xl font-semibold">Work experience</h2>
+
+  <div class="flex flex-wrap gap-8 gap-y-4 mt-8">
+    {
+      workSorted.map((job) => (
+        <WorkCard
+          image={job.data.image}
+          company={job.data.company}
+          location={job.data.location}
+          role={job.data.role}
+          startDate={job.data.startDate}
+          endDate={job.data.endDate}
+          projects={job.data.projects}
+        />
+      ))
+    }
+  </div>
+</section>

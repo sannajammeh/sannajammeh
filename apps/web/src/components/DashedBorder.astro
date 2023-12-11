@@ -1,0 +1,33 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  radius?: string;
+  strokeWidth?: number;
+  strokeDasharray?: number;
+};
+
+const {
+  as: Tag,
+  size,
+  radius = "20px",
+  strokeWidth = 4,
+  strokeDasharray = 10,
+  ...props
+} = Astro.props;
+
+const svgBorder = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='${radius}' ry='${radius}' stroke='black' stroke-width='${strokeWidth}' stroke-dasharray='${strokeDasharray}' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`;
+---
+
+<div class="contents">
+  <Tag {...props} class:list={["dashed-border-tag"]}>
+    <slot />
+  </Tag>
+</div>
+
+<style define:vars={{ svgBorder, radius }}>
+  .dashed-border-tag {
+    background-image: var(--svgBorder);
+    border-radius: var(--radius);
+  }
+</style>

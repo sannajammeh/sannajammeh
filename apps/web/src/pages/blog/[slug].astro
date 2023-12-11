@@ -1,0 +1,71 @@
+---
+import RootLayout from "@/layouts/RootLayout.astro";
+import type { InferGetStaticPropsType } from "astro";
+import { getCollection } from "astro:content";
+import { SEO, type Props as SEOProps } from "astro-seo";
+import { Picture, getImage } from "astro:assets";
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection("posts");
+  const paths = posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+    props: {
+      post,
+    },
+  }));
+  return paths;
+};
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props;
+
+const { Content } = await post.render();
+
+const ogImage = post.data.image
+  ? await getImage({
+      src: post.data.image,
+      format: "png",
+      width: 1200,
+      height: 630,
+    })
+  : undefined;
+
+const seoProps: SEOProps = {
+  title: `${post.data.title} | Sanna Jammeh`,
+  description: post.data.description,
+  openGraph: {
+    basic: {
+      title: post.data.title,
+      type: "article",
+      image: ogImage?.src!,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: Astro.site!.href!,
+    creator: "@sannajammeh5",
+    image: ogImage?.src!,
+  },
+};
+---
+
+<RootLayout>
+  <SEO slot="head" {...seoProps} />
+  <main class="prose mx-auto max-md:px-4">
+    {
+      post.data.image && (
+        <Picture
+          loading="eager"
+          src={post.data.image}
+          widths={[300, 600, 900, 1200]}
+          alt={`${post.data.title} main image`}
+          class="rounded-2xl shadow-xl mt-8 border-2 border-black"
+        />
+      )
+    }
+    <Content />
+  </main>
+</RootLayout>
