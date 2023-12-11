@@ -15,12 +15,14 @@ export async function GET(context: APIContext) {
     site: context.site!,
     // Array of `<item>`s in output xml
     // See "Generating items" section for examples using content collections and glob imports
-    items: blog.map((post) => ({
-      title: post.data.title,
-      pubDate: post.data.date,
-      description: post.data.description,
-      link: `/blog/${post.slug}`,
-    })),
+    items: blog
+      .map((post) => ({
+        title: post.data.title,
+        pubDate: post.data.date,
+        description: post.data.description,
+        link: `/blog/${post.slug}`,
+      }))
+      .toSorted((a, b) => b.pubDate.getTime() - a.pubDate.getTime()),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
   });

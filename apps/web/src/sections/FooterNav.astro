@@ -23,6 +23,13 @@ const navItem = classed(
   <nav-indicator></nav-indicator>
 </nav>
 
+<template id="nav-indicator-template">
+  <span
+    id="thumb"
+    class="left-0 absolute top-50% -translate-y-50% bg-black rounded-xl -z-1"
+  ></span>
+</template>
+
 <script>
   import { composePatterns } from "../utils/url";
   // @ts-ignore: Property 'UrlPattern' does not exist
@@ -52,15 +59,18 @@ const navItem = classed(
   const navItems = Array.from(navItemMap.values()).map(({ item }) => item);
 
   class NavIndicator extends HTMLElement {
-    static template = `<span class="left-0 absolute top-50% -translate-y-50% bg-black rounded-xl -z-1"></span>`;
     content: HTMLSpanElement;
     firstPass = true;
     constructor() {
       super();
 
       this.style.display = "contents";
-      this.innerHTML = NavIndicator.template;
-      this.content = this.querySelector("span")!;
+      const content = document
+        .querySelector<HTMLTemplateElement>("#nav-indicator-template")!
+        .content.cloneNode(true);
+
+      this.appendChild(content);
+      this.content = this.querySelector<HTMLSpanElement>("span")!;
     }
 
     move = (item: HTMLElement, off: HTMLElement[]) => {
