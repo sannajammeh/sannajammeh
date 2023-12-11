@@ -22,8 +22,9 @@ const colors = ["bg-blue", "bg-orange"];
           description={entry.data.description}
           image={entry.data.image}
           slug={entry.id}
-          type="case-study"
+          type={entry.data.type}
           colorClass={colors[index]}
+          href={entry.data.href}
         />
       ))
     }

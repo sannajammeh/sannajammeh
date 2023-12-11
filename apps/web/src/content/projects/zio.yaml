@@ -2,3 +2,5 @@ name: ZiO Pizza
 image: ./images/zio.png
 description: The taste of Italy right around the corner. A unique page for a unique restaurant.
 startDate: 2023-06-01
+href: https://ziopizza.no
+type: link

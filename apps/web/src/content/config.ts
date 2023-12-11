@@ -46,7 +46,7 @@ const projectsCollection = defineCollection({
       image: image(),
       startDate: z.date(),
       type: z.enum(["case-study", "link"]).optional().default("case-study"),
-      href: z.string().optional(),
+      href: z.string(),
     }),
 });
 

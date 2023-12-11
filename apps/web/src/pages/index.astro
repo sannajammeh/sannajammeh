@@ -6,20 +6,14 @@ import meJpg from "../assets/me.jpg";
 import WorkSection from "../sections/home/Work.astro";
 import ProjectsSection from "../sections/home/ProjectsSection.astro";
 import { classed } from "@tw-classed/core";
-import {
-  GithubIcon,
-  InstagramIcon,
-  TwitterIcon,
-  WholeWordIcon,
-  XIcon,
-} from "lucide-solid";
+import { GithubIcon, InstagramIcon, WholeWordIcon } from "lucide-solid";
 
 const socialLink = classed(
   "text-gray-600 hover:text-gray-800 inline-flex items-center gap-2px hover:underline underline-offset-2"
 );
 ---
 
-<RootLayout title="Sanna Jammeh | Indie dev">
+<RootLayout title="Sanna Jammeh | Fullstack developer">
   <section id="hero">
     <div class="mt-12 flex items-center justify-start gap-4 container mx-auto">
       <Image
@@ -34,7 +28,7 @@ const socialLink = classed(
           passion for frontend and design.
         </p>
         <div class="flex gap-4 flex-wrap">
-          <a class={socialLink()} href="/resume"
+          <a class={socialLink()} target="_blank" href="/resume.pdf"
             ><WholeWordIcon size="1.6em" /> Resume</a
           >
           <a
@@ -47,8 +41,10 @@ const socialLink = classed(
           <!-- <a class={socialLink()} href="https://x.com/sannajammeh5"
             ><XIcon /> @sannajammeh5</a
           > -->
-          <a class={socialLink()} href="https://instagram.com/sanjammeh"
-            ><InstagramIcon size="1.2em" /> @sanjammeh</a
+          <a
+            class={socialLink()}
+            href="https://instagram.com/sanjammeh"
+            target="_blank"><InstagramIcon size="1.2em" /> @sanjammeh</a
           >
         </div>
       </div>

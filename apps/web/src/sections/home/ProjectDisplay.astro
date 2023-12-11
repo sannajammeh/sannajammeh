@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { BookmarkIcon } from "lucide-solid";
+import { BookmarkIcon, LinkIcon } from "lucide-solid";
 
 interface Props {
   title: string;
@@ -56,6 +56,14 @@ const {
     type === "case-study" && (
       <div class="absolute bg-indigo-500 border-black border-2 -bottom-4 right-15% px-3 py-1.5 rounded-lg text-white flex items-center gap-px shadow-brutalism-2 font-semibold">
         <BookmarkIcon /> Case study!
+      </div>
+    )
+  }
+
+  {
+    type === "link" && (
+      <div class="absolute bg-yellow-500 border-black border-2 -bottom-4 right-15% px-3 py-1.5 rounded-lg text-white flex items-center gap-2px shadow-brutalism-2 font-semibold">
+        <LinkIcon size="1.25em" /> Link
       </div>
     )
   }
