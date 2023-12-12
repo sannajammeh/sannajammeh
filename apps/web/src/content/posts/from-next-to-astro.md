@@ -434,7 +434,7 @@ That is a 50% reduction in build time, 95% reduction in JS size, 54% reduction i
 
 ### Cons
 
-- **Astro's LSP needs some work** - Astro's LSP can feel a bit clunky at times. Especially in regards to new folders. I've had to restart the entire VSCode extension host every time I add a new folder in order for types and auto imports to work properly. This is a minor inconvenience, but it can be a bit annoying at times. Additionally, Astro's `Reload projects` command does not seem to fix the issue, prompting a full extension host reset.
+- **Astro's LSP needs some work** - Astro's LSP can feel a bit clunky at times. Especially in regards to new folders. I've had to restart the entire VSCode extension host every time I add a new folder in order for types and auto imports to work properly. Additionally, Astro's `Reload projects` command does not seem to fix the issue, prompting a full extension host reset.
 - **No multi component files** - This is a minor inconvenience coming from React. Being able to export - or just create - multiple components from a single file is definitely a nice to have.
 
 ## Conclusion
