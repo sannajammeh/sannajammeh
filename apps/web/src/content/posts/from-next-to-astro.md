@@ -439,7 +439,7 @@ That is a 50% reduction in build time, 95% reduction in JS size, 54% reduction i
 
 ## Conclusion
 
-I'm very happy with the results of the migration. Astro has allowed me to simplify my stack, and focus on the things that matter. I'm looking forward to seeing how Astro evolves, and I'm excited to see what the future holds for this project. The DX and performance gains are well worth the switch.
+I'm very happy with the results of the migration. Astro has allowed me to simplify my stack, and focus on the things that matter. I'm looking forward to seeing how Astro evolves, and I'm excited to see what the future holds for this site. Expect many new sprinkles of interactivity in the future.
 
 The new Astro 4 source is available here:
 https://github.com/sannajammeh/sannajammeh/tree/master
