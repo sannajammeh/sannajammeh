@@ -2,7 +2,10 @@
 import { Image } from "astro:assets";
 import RootLayout from "../../layouts/RootLayout.astro";
 import { getCollection } from "astro:content";
-const posts = await getCollection("posts");
+const posts = (await getCollection("posts")).toSorted(
+  // @ts-expect-error - Date field arithmetics
+  (a, b) => b.data.date - a.data.date
+);
 
 const dateFormat = new Intl.DateTimeFormat("en-US", {
   weekday: "long",
@@ -16,13 +19,20 @@ const [firstPost, ...rest] = posts;
 
 <RootLayout title="Blog - Sanna Jammeh">
   <section class="mt-8 max-md:px-4">
+    <div class="max-w-prose mx-auto mb-4">
+      <h1 class="text-4xl font-semibold">Latest post</h1>
+    </div>
     <a href={`/blog/${firstPost.slug}`}>
       <article
         class="rounded-2xl overflow-hidden w-full max-w-prose mx-auto border border-black border-2 hover:shadow-[0.4vmin_0.4vmin_#000] hover:scale-[1.01] transition-all duration-200 ease-in-out"
       >
         {
           firstPost.data.image && (
-            <Image src={firstPost.data.image} alt={firstPost.data.title} />
+            <Image
+              class="aspect-video w-full"
+              src={firstPost.data.image}
+              alt={firstPost.data.title}
+            />
           )
         }
         <div class="p-3 flex flex-col gap-4 pb-8">
@@ -48,13 +58,17 @@ const [firstPost, ...rest] = posts;
   </section>
   <section class="mt-24 container mx-auto">
     <h2 class="mb-4 text-3xl font-semibold">More Posts</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
       {
         rest.map((post) => (
           <a href={`/blog/${post.slug}`}>
             <article class="rounded-2xl overflow-hidden max-w-prose border-black border-2 hover:shadow-[0.4vmin_0.4vmin_#000] hover:scale-[1.01] transition-all duration-200 ease-in-out">
               {post.data.image && (
-                <Image src={post.data.image} alt={post.data.title} />
+                <Image
+                  class="aspect-video w-full"
+                  src={post.data.image}
+                  alt={post.data.title}
+                />
               )}
               <div class="flex flex-col gap-3 p-3">
                 <p>
@@ -62,8 +76,12 @@ const [firstPost, ...rest] = posts;
                     {dateFormat.format(post.data.date)}
                   </time>
                 </p>
-                <h2 class="text-2xl font-semibold">{post.data.title}</h2>
-                <p class="text-lg text-gray-6">{post.data.description}</p>
+                <h2 class="text-2xl font-semibold line-clamp-2">
+                  {post.data.title}
+                </h2>
+                <p class="text-lg text-gray-6 line-clamp-2">
+                  {post.data.description}
+                </p>
               </div>
             </article>
           </a>

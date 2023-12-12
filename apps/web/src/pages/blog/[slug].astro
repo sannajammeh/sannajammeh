@@ -4,6 +4,7 @@ import type { InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
 import { SEO, type Props as SEOProps } from "astro-seo";
 import { Picture, getImage } from "astro:assets";
+import TableOfContents from "@/sections/blog/TableOfContents.astro";
 
 export const getStaticPaths = async () => {
   const posts = await getCollection("posts");
@@ -22,7 +23,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props;
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const ogImage = post.data.image
   ? await getImage({
@@ -55,6 +56,7 @@ const seoProps: SEOProps = {
 <RootLayout>
   <SEO slot="head" {...seoProps} />
   <main class="prose mx-auto max-md:px-4">
+    <TableOfContents headings={headings} />
     {
       post.data.image && (
         <Picture

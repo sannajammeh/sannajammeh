@@ -14,3 +14,5 @@ export function composePatterns(...patterns: URLPattern[]) {
     },
   };
 }
+
+export type PatternMatcher = ReturnType<typeof composePatterns>;

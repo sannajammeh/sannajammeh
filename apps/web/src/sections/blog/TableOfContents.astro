@@ -1,0 +1,57 @@
+---
+import { type MarkdownHeading } from "astro";
+import TOC from "./TOC.astro";
+
+type Props = {
+  headings: MarkdownHeading[];
+};
+
+const { headings } = Astro.props;
+---
+
+<aside
+  id="toc"
+  class="top-4 w-[clamp(250px,80%,400px)] z-10 bg-white mx-auto border filter-drop-shadow-lg border-black rounded-2xl p-2 shadow-black/80 shadow-brutalism-2 not-prose"
+>
+  <details>
+    <summary class="w-full">
+      <h2 class="text-xl inline-flex justify-center flex-1">
+        Table of Contents
+      </h2>
+    </summary>
+    <div class="toc-items pl-1">
+      <TOC toc={headings} maxDepth={3} />
+    </div>
+  </details>
+</aside>
+
+<style>
+  .toc-items :global(li) {
+    margin-inline-start: 10px;
+  }
+
+  .toc-items :global(a) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<script>
+  const toc = document.querySelector<HTMLDivElement>("aside#toc")!;
+  const details = toc.querySelector<HTMLDetailsElement>("details")!;
+
+  // On click outside of the TOC, close it
+  document.addEventListener("click", (e) => {
+    if (!toc.contains(e.target as Node)) {
+      details.open = false;
+    }
+  });
+
+  // On click inside a tag of the TOC, close it
+  details.addEventListener("click", (e) => {
+    if (e.target instanceof HTMLAnchorElement) {
+      details.open = false;
+    }
+  });
+</script>
