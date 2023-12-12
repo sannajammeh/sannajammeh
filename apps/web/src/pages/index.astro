@@ -7,13 +7,20 @@ import WorkSection from "../sections/home/Work.astro";
 import ProjectsSection from "../sections/home/ProjectsSection.astro";
 import { classed } from "@tw-classed/core";
 import { GithubIcon, InstagramIcon, WholeWordIcon } from "lucide-solid";
+import {SEO, type Props as SEOProps} from "astro-seo"
 
 const socialLink = classed(
   "text-gray-600 hover:text-gray-800 inline-flex items-center gap-2px hover:underline underline-offset-2"
 );
+
+const seoProps: SEOProps = {
+  title: "Sanna Jammeh | Fullstack developer",
+  description: "Crafting UIs since 2017, strengths on both ends of the stack with a passion for frontend and design.",
+}
 ---
 
 <RootLayout title="Sanna Jammeh | Fullstack developer">
+  <SEO {...seoProps}  />
   <section id="hero">
     <div
       class="mt-12 flex md:items-center justify-start gap-4 container mx-auto"
