@@ -1,6 +1,6 @@
 # Sanna Jammeh | Fullstack Developer
 
-Nowregian 🇳🇴 Freelance developer and library maintainer
+Nowregian 🇳🇴 Fullstack developer and library maintainer
 
 ### Support my work
 
