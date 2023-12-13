@@ -20,6 +20,18 @@ const { title } = Astro.props;
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <script
+      async
+      defer
+      is:inline
+      src="https://north-analytics-client-khwxlcwm8-sannajammeh.vercel.app/assets/tracker.js"
+      data-website-id="01HHG3B8TW6ZZVEW471DJWFMBB"></script>
+    <script
+      type="module"
+      defer
+      is:inline
+      src="https://north-analytics-client-khwxlcwm8-sannajammeh.vercel.app/assets/web-vitals.js"
+      data-website-id="01HHG3B8TW6ZZVEW471DJWFMBB"></script>
     {title && <title>{title}</title>}
     <slot name="head" />
   </head>
