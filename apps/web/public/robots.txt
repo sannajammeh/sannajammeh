@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sannajammeh.com/sitemap-index.xml
