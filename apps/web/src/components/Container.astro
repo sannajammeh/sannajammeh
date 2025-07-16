@@ -1,0 +1,17 @@
+---
+
+---
+
+<div {...Astro.props} class:list={["container", Astro.props.class]}>
+  <slot />
+</div>
+
+<style>
+  .container {
+    max-width: 80vw;
+    margin: 0 auto;
+    border-left: 1px solid light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
+    border-right: 1px solid light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
+    padding-inline: 1rem;
+  }
+</style>
