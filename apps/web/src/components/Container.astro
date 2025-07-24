@@ -1,17 +1,102 @@
 ---
+import { Icon } from "astro-icon/components";
+type Props = {
+  large?: boolean;
+  class?: string;
+  style?: string;
+  max?: boolean;
+};
 
+const { large, class: className, max, ...props } = Astro.props;
 ---
 
-<div {...Astro.props} class:list={["container", Astro.props.class]}>
+<div
+  {...props}
+  class:list={["container", className, large && "large", max && "max"]}
+>
   <slot />
+  <Icon
+    name="carbon:add"
+    class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 text-rose-500"
+  />
+  <Icon
+    name="carbon:add"
+    class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 text-rose-500"
+  />
+  <Icon
+    name="carbon:add"
+    class="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 text-rose-500"
+  />
+  <Icon
+    name="carbon:add"
+    class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 text-rose-500"
+  />
+  <!-- <span class="plus tl"></span>
+  <span class="plus tr"></span>
+  <span class="plus bl"></span>
+  <span class="plus br"></span> -->
 </div>
 
 <style>
   .container {
-    max-width: 80vw;
+    max-width: min(calc(100vw - 1rem), 700px);
     margin: 0 auto;
-    border-left: 1px solid light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
-    border-right: 1px solid light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
+    border-left: 1px dotted light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
+    border-right: 1px dotted
+      light-dark(rgb(0 0 0 / 0.1), rgb(255 255 255 / 0.1));
     padding-inline: 1rem;
+    position: relative;
+
+    &.large {
+      max-width: min(calc(100vw - 1rem), 900px);
+    }
+    &.max {
+      max-width: 100%;
+    }
+  }
+
+  .plus {
+    --size: 8px;
+    width: var(--size);
+    height: var(--size);
+    position: absolute;
+    color: crimson;
+    &.tl {
+      top: calc(var(--size) * -1);
+      left: calc(var(--size) * -1);
+    }
+    &.tr {
+      top: calc(var(--size) * -1);
+      right: calc(var(--size) * -1);
+    }
+    &.bl {
+      bottom: calc(var(--size) * -1);
+      left: calc(var(--size) * -1);
+    }
+    &.br {
+      bottom: calc(var(--size) * -1);
+      right: calc(var(--size) * -1);
+    }
+    &::before {
+      content: "";
+      height: 1px;
+      width: 100%;
+      background: currentColor;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    &::after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      background: currentColor;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 </style>

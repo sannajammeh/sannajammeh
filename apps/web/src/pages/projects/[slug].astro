@@ -1,0 +1,80 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { getEntry, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import Plus from "../../components/Plus.astro";
+
+const item = await getEntry("projects", Astro.params.slug!);
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection("projects");
+  return entries.map((entry) => ({
+    params: {
+      slug: entry.id,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+if (!item) {
+  return new Response("Not found", { status: 404 });
+}
+
+const { Content } = await render(item);
+const { large } = item.data;
+---
+
+<Layout>
+  <div class="container mx-auto py-64 add-perspective">
+    <div class="blur-in-scale-right">
+      <Container max>
+        <hgroup class="pb-48 grid grid-cols-2">
+          <div>
+            <h1 class="text-6xl font-medium">
+              {item.data.title}
+            </h1>
+
+            <Plus
+              class="border border-dotted px-1 py-0.5 w-fit text-xs text-amber-500"
+            >
+              {item.data.role}
+            </Plus>
+          </div>
+          <div>
+            <p class="pb-3 text-lg text-right font-doto">
+              {
+                new Date().toLocaleString("nb-NO", {
+                  dateStyle: "long",
+                  timeStyle: "long",
+                })
+              }
+            </p>
+            <p>
+              {item.data.description}
+            </p>
+            {
+              item.data.href && (
+                <Plus
+                  as="a"
+                  target="_blank"
+                  class="block w-max ml-auto px-2 hover:text-blue-400 border-[currentColor] py-0.5 font-doto border border-dotted"
+                  href={item.data.href}
+                >
+                  Open project
+                </Plus>
+              )
+            }
+          </div>
+        </hgroup>
+      </Container>
+      <Container max>
+        <div
+          class:list={["prose prose-invert counter", large && "!max-w-full"]}
+        >
+          <Content />
+        </div>
+      </Container>
+    </div>
+  </div>
+</Layout>

@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "tailwindcss": "^4.1.11",
     "turbo": "^2.5.4"
   },
   "engines": {
