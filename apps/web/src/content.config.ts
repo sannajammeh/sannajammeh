@@ -32,6 +32,7 @@ const projects = defineCollection({
       role: z.string().optional(),
       description: z.string().optional(),
       large: z.boolean().optional().default(false),
+      date: z.coerce.date().optional(),
     }),
 });
 

@@ -1,20 +1,22 @@
 ---
 import { Icon } from "astro-icon/components";
 const item =
-  "grid grid-cols-[24px_1fr] items-center [&>:first-child]:justify-self-center";
+  "grid gap-[12px] grid-cols-[24px_1fr] items-center [&>:first-child]:justify-self-center ";
 ---
 
 <nav class="mt-4 uppercase font-doto">
   <ul>
     <li>
-      <a class:list={[item]} href="/projects"
-        ><Icon name="carbon:repo-source-code" /> Projects</a
+      <a
+        class:list={[
+          item,
+          "hover:scale-[1.02] transition-transform duration-200",
+          "text-[20px]",
+        ]}
+        href="/projects"><Icon name="carbon:repo-source-code" /> Projects</a
       >
     </li>
-    <li>
-      <a class:list={[item]} href="/blog"><Icon name="carbon:book" /> Blog</a>
-    </li>
-    <li class:list={[item]}>
+    <li class:list={[item, "mt-3"]}>
       <Icon name="carbon:location-heart" /><span>Made in 🇳🇴</span>
     </li>
   </ul>

@@ -42,14 +42,15 @@ const { large } = item.data;
             </Plus>
           </div>
           <div>
-            <p class="pb-3 text-lg text-right font-doto">
-              {
-                new Date().toLocaleString("nb-NO", {
-                  dateStyle: "long",
-                  timeStyle: "long",
-                })
-              }
-            </p>
+            {
+              !!item.data.date && (
+                <p class="pb-3 text-lg text-right font-doto">
+                  {new Date(item.data.date).toLocaleString("en-US", {
+                    dateStyle: "long",
+                  })}
+                </p>
+              )
+            }
             <p>
               {item.data.description}
             </p>
