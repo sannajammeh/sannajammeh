@@ -11,23 +11,28 @@ const { large, class: className, max, ...props } = Astro.props;
 ---
 
 <div
+  data-container
   {...props}
   class:list={["container", className, large && "large", max && "max"]}
 >
   <slot />
   <Icon
+    data-target
     name="carbon:add"
     class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 text-rose-500"
   />
   <Icon
+    data-target
     name="carbon:add"
     class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 text-rose-500"
   />
   <Icon
+    data-target
     name="carbon:add"
     class="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 text-rose-500"
   />
   <Icon
+    data-target
     name="carbon:add"
     class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 text-rose-500"
   />
@@ -100,3 +105,30 @@ const { large, class: className, max, ...props } = Astro.props;
     }
   }
 </style>
+
+<script>
+  const element = document.querySelector<HTMLElement>("[data-container]");
+
+  if (element?.dataset.minigame) {
+    // Minigame: Each icon must be clickable.
+    function check() {
+      const icons = element!.querySelectorAll<HTMLElement>("svg[data-target]");
+
+      return Array.from(icons).every((icon) => {
+        return icon.dataset.clicked === "true";
+      });
+    }
+
+    const icons = element.querySelectorAll<HTMLElement>("svg[data-target]");
+    icons.forEach((icon) => {
+      icon.style.cursor = "pointer";
+      icon.addEventListener("click", () => {
+        icon.dataset.clicked = "true";
+        icon.style.opacity = "0.5";
+        if (check()) {
+          element.dataset.minigameComplete = "true";
+        }
+      });
+    });
+  }
+</script>

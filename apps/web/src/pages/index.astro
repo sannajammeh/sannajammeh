@@ -7,7 +7,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <Main class="add-perspective">
-    <Container class="scale-in">
+    <Container data-minigame="true" class="scale-in">
       <hgroup>
         <h1
           class="text-2xl uppercase font-mono font-bold max-w-1/2 text-balance blur-in"
@@ -15,8 +15,8 @@ import Layout from "../layouts/Layout.astro";
           I make cool sh#t that perform.
         </h1>
         <p class="text-neutral-400">
-          Sanna Jammeh - Fullstack engineer @ <span class="blur-xs"
-            >Soon to be decided</span
+          Sanna Jammeh - Fullstack engineer @ <span class="blur-xs blur-release"
+            >Try Dig AS</span
           >
         </p>
       </hgroup>
@@ -32,3 +32,13 @@ import Layout from "../layouts/Layout.astro";
     </Container>
   </Main>
 </Layout>
+
+<style>
+  .blur-release {
+    filter: blur(4px);
+    transition: filter 0.2s ease;
+  }
+  [data-minigame-complete] .blur-release {
+    filter: blur(0px);
+  }
+</style>
