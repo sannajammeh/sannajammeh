@@ -28,6 +28,7 @@ const projects = defineCollection({
       dark_on_hover: z.boolean().optional().default(false),
       image_position: z.string().optional().default("top"),
       bury: z.boolean().optional().default(false),
+      group: z.string().optional(),
       href: z.string().optional(),
       role: z.string().optional(),
       description: z.string().optional(),

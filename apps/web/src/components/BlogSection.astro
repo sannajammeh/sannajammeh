@@ -22,7 +22,11 @@ const latestPosts = posts
       <div></div>
       <div></div>
       
-      {latestPosts.map((post, index) => (
+      {latestPosts.length === 0 ? (
+        <p class="col-span-3 text-neutral-600 text-sm uppercase font-doto scale-in" style="animation-delay: 150ms">
+          My thoughts will be uploaded here when I have them.
+        </p>
+      ) : latestPosts.map((post, index) => (
         <a 
           href={`/blog/${post.id}/`}
           class="border-dotted border-neutral-800 p-3 w-full flex flex-col justify-end relative card group scale-in"
