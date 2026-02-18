@@ -24,6 +24,11 @@ const getImagePos = (pos: string) => {
 
 const sortedProjects = projects
   .toSorted((a, b) => {
+    // Pin "Company" keyword projects to the top
+    const aIsCompany = a.data.keywords?.some((k) => k.toLowerCase() === "company") ?? false;
+    const bIsCompany = b.data.keywords?.some((k) => k.toLowerCase() === "company") ?? false;
+    if (aIsCompany !== bIsCompany) return aIsCompany ? -1 : 1;
+
     // compare by project.data.keywords - sort similar locale comparison
 
     const aKeywords = a.data.keywords?.toSorted();
@@ -175,6 +180,21 @@ const sortedProjects = projects
     & .mask {
       mask-size: 0.1px 0.1px;
       filter: brightness(1);
+    }
+  }
+
+  /* Firefox doesn't handle mask-size transitions well — disable mask entirely */
+  @-moz-document url-prefix() {
+    .mask {
+      mask-image: none;
+      filter: brightness(2);
+      transition: filter 0.3s ease-in-out;
+    }
+
+    .group:hover {
+      & .mask {
+        filter: brightness(1);
+      }
     }
   }
 </style>

@@ -3,6 +3,7 @@ import Container from "../components/Container.astro";
 import Main from "../components/Main.astro";
 import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
+import BlogSection from "../components/BlogSection.astro";
 ---
 
 <Layout>
@@ -27,9 +28,12 @@ import Layout from "../layouts/Layout.astro";
       </p>
       <Nav />
 
-      <!-- <Wolf />
-      <Projects /> -->
+      <!-- <Wolf /> -->
     </Container>
+  </Main>
+  
+      <Main>
+    <BlogSection />
   </Main>
 </Layout>
 

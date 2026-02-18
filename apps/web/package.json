@@ -13,12 +13,12 @@
     "tailwindcss": "^4.1.11"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "@iconify-json/carbon": "^1.2.11",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.11.1",
+    "astro": "^5.17.2",
     "astro-icon": "^1.1.5",
     "sharp": "^0.34.2"
   }

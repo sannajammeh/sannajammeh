@@ -7,6 +7,10 @@
   --animation-time: 0.5s;
 }
 
+* {
+  outline-color: crimson;
+}
+
 .font-doto {
   font-family: "Doto", sans-serif;
   font-optical-sizing: auto;
