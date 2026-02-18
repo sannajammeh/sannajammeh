@@ -1,0 +1,161 @@
+---
+import { getCollection } from "astro:content";
+import Container from "../../components/Container.astro";
+import Layout from "../../layouts/Layout.astro";
+import Plus from "../../components/Plus.astro";
+import { createGetColor } from "../../util/staircase";
+import Title from "../../components/Title.astro";
+
+const projects = await getCollection("projects");
+
+const getColor = createGetColor();
+
+const sortedProjects = projects
+  .toSorted((a, b) => {
+    // Pin "Company" keyword projects to the top
+    const aIsCompany = a.data.keywords?.some((k) => k.toLowerCase() === "company") ?? false;
+    const bIsCompany = b.data.keywords?.some((k) => k.toLowerCase() === "company") ?? false;
+    if (aIsCompany !== bIsCompany) return aIsCompany ? -1 : 1;
+
+    const aKeywords = a.data.keywords?.toSorted();
+    const bKeywords = b.data.keywords?.toSorted();
+    if (!aKeywords || !bKeywords) return 0;
+
+    const aKeywordsString = aKeywords.join(" ");
+    const bKeywordsString = bKeywords.join(" ");
+
+    if (aKeywordsString.length !== bKeywordsString.length) {
+      return bKeywordsString.length - aKeywordsString.length;
+    }
+
+    return aKeywordsString.localeCompare(bKeywordsString);
+  })
+  .filter((val) => !val.data.bury)
+  .concat(projects.filter((v) => v.data.bury));
+
+// Group children under their parent project's id
+const grouped = Object.groupBy(
+  sortedProjects.filter((p) => !!p.data.group),
+  (p) => p.data.group!,
+);
+
+// Top-level items: no group field set
+const topLevel = sortedProjects.filter((p) => !p.data.group);
+---
+
+<Layout>
+  <main class="h-screen grid items-center w-full">
+    <Container class="blur-in">
+      <div class="container mx-auto py-16 add-perspective">
+        <div class="mb-8">
+          <Title backHref="/" class="sticky top-16"> Work. </Title>
+          <p class="uppercase text-sm text-neutral-600 text-balance">
+            Customers I've worked with, sites I've made.
+          </p>
+        </div>
+        <ul class="flex flex-col">
+          {
+            (() => {
+              let animIndex = 0;
+              return topLevel.map((project) => {
+                const { href, keywords, title, role } = project.data;
+                const hasContent = !!project.body;
+                const Tag = href || hasContent ? "a" : "li";
+                const children = grouped[project.id];
+                const currentIndex = animIndex++;
+
+                return (
+                  <>
+                    <Tag
+                      href={hasContent ? `/work/${project.id}` : href}
+                      target={href && !hasContent ? "_blank" : undefined}
+                      class="border-b border-dotted border-neutral-800 py-3 w-full flex items-center justify-between gap-4 group scale-in"
+                      style={`animation-delay: ${currentIndex * 50 + 150}ms`}
+                    >
+                      <div class="flex items-center gap-4">
+                        <h3 class="font-doto uppercase font-medium text-sm group-hover:translate-x-2 transition-transform">
+                          {title}
+                        </h3>
+                        {role && (
+                          <span class="text-[9px] uppercase text-neutral-500">
+                            {role}
+                          </span>
+                        )}
+                      </div>
+
+                      {keywords && (
+                        <dl class="flex gap-3">
+                          <dt class="sr-only">Keywords</dt>
+                          {keywords.toSorted().map((keyword) => (
+                            <Plus
+                              as="dd"
+                              class:list={[
+                                "text-[9px] uppercase py-0.5 px-1 border border-dotted relative",
+                                getColor(keyword.toLowerCase()),
+                              ]}
+                            >
+                              {keyword}
+                            </Plus>
+                          ))}
+                        </dl>
+                      )}
+                    </Tag>
+
+                    {children && (
+                      <ul class="flex flex-col">
+                        {children.map((child) => {
+                          const { href: childHref, keywords: childKeywords, title: childTitle, role: childRole } = child.data;
+                          const childHasContent = !!child.body;
+                          const ChildTag = childHref || childHasContent ? "a" : "li";
+                          const childIndex = animIndex++;
+
+                          return (
+                            <ChildTag
+                              href={childHasContent ? `/work/${child.id}` : childHref}
+                              target={childHref && !childHasContent ? "_blank" : undefined}
+                              class="border-b border-dotted border-neutral-800 py-3 pl-6 w-full flex items-center justify-between gap-4 group scale-in"
+                              style={`animation-delay: ${childIndex * 50 + 150}ms`}
+                            >
+                              <div class="flex items-center gap-4">
+                                <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                                <h4 class="font-doto uppercase font-medium text-sm group-hover:translate-x-2 transition-transform">
+                                  {childTitle}
+                                </h4>
+                                {childRole && (
+                                  <span class="text-[9px] uppercase text-neutral-500">
+                                    {childRole}
+                                  </span>
+                                )}
+                              </div>
+
+                              {childKeywords && (
+                                <dl class="flex gap-3">
+                                  <dt class="sr-only">Keywords</dt>
+                                  {childKeywords.toSorted().map((keyword) => (
+                                    <Plus
+                                      as="dd"
+                                      class:list={[
+                                        "text-[9px] uppercase py-0.5 px-1 border border-dotted relative",
+                                        getColor(keyword.toLowerCase()),
+                                      ]}
+                                    >
+                                      {keyword}
+                                    </Plus>
+                                  ))}
+                                </dl>
+                              )}
+                            </ChildTag>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </>
+                );
+              });
+            })()
+          }
+        </ul>
+      </div>
+    </Container>
+  </main>
+</Layout>

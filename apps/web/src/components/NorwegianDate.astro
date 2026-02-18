@@ -1,0 +1,18 @@
+---
+interface Props {
+	date: Date;
+}
+
+const { date } = Astro.props;
+
+const months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 
+                'juli', 'august', 'september', 'oktober', 'november', 'desember'];
+
+const formatNorwegianDate = (date: Date) => {
+  return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
+};
+---
+
+<time datetime={date.toISOString()}>
+	{formatNorwegianDate(date)}
+</time>

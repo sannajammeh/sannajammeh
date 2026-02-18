@@ -1,0 +1,47 @@
+---
+import Container from "./Container.astro";
+---
+
+<header>
+  <Container data-container>
+    Sanna Jammeh.
+
+    <nav>
+      <ul>
+        <li><a href="/work">Work</a></li>
+        <li>
+          <a href="/blog">Blog</a>
+          <li><a href="/oss">OSS</a></li>
+        </li>
+      </ul>
+    </nav>
+  </Container>
+
+  <style>
+    header > [data-container] {
+      display: flex;
+      padding-block: 1rem;
+      justify-content: space-between;
+    }
+
+    nav {
+      & ul {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      a {
+        color: light-dark(black, white);
+        text-decoration: none;
+
+        @media (hover: hover) {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  </style>
+</header>

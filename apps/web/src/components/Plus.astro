@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  size?: string | number;
+};
+
+const { as: Tag = "div", size, class: className, ...props } = Astro.props;
+---
+
+<Tag {...props} class:list={["relative", className]}>
+  <slot />
+  <Icon
+    size={size}
+    name="carbon:add"
+    class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 text-current"
+  />
+  <Icon
+    size={size}
+    name="carbon:add"
+    class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 text-current"
+  />
+  <Icon
+    size={size}
+    name="carbon:add"
+    class="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 text-current"
+  />
+  <Icon
+    size={size}
+    name="carbon:add"
+    class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 text-current"
+  />
+</Tag>
